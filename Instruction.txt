@@ -1,0 +1,31 @@
+1. Giới thiệu
+
+Ứng dụng Dự đoán Giá Nhà là một hệ thống giúp người dùng ước lượng giá trị bất động sản dựa trên các yếu tố như vị trí, diện tích, số phòng, năm xây dựng và các đặc điểm khác.
+Mục tiêu là cung cấp cho người dùng (người mua, người bán hoặc nhà đầu tư) một công cụ tham khảo nhanh chóng và chính xác dựa trên dữ liệu lịch sử và mô hình học máy (Machine Learning).
+
+2. Đối tượng sử dụng
+
+Người bán nhà: Muốn biết giá thị trường hợp lý để đăng bán.
+
+Người mua nhà: Muốn tham khảo giá trước khi quyết định mua.
+
+Nhà đầu tư bất động sản: Phân tích xu hướng giá theo khu vực.
+
+3. Chức năng chính
+
+Đăng ký & Đăng nhập (Authentication)
+
+Người dùng tạo tài khoản, lưu lịch sử dự đoán.
+
+Quản lý nhà (House Management)
+
+Nhập thông tin căn nhà: vị trí, diện tích, số phòng ngủ, số phòng tắm, năm xây dựng, mô tả.
+
+Dự đoán giá (Prediction)
+
+Hệ thống trả về mức giá ước tính dựa trên mô hình AI/ML.
+
+Lưu lịch sử dự đoán
+
+Mỗi lần dự đoán được lưu lại để người dùng so sánh.
+
