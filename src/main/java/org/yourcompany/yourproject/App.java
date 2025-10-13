@@ -1,16 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package org.yourcompany.yourproject;
+
+import org.yourcompany.yourproject.Entity.House;
+import org.yourcompany.yourproject.Entity.User;
 
 /**
  *
  * @author HACOM
  */
-public class App {
+public class App { 
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        House nha=new House();
+        User domixi=new User();
+        
     }
 }
