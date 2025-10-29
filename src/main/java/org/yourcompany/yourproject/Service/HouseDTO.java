@@ -1,73 +1,19 @@
-package org.yourcompany.yourproject.Entity;
+package org.yourcompany.yourproject.Service;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+public class HouseDTO {
 
-@Document(collection = "houses")
-public class House {
-
-    @Id
-    private String id; 
-
-    @Field("area")
     private Integer area;
-    @Field("address")
-    private String address; 
-
-    @Field("street_in_front_of_house")
-    private Integer streetInFrontOfHouse; 
-
-    @Field("width")
-    private Double width; 
-
-    @Field("height")
-    private Integer height; 
-
-    @Field("floor_number")
-    private Integer floorNumber; 
-
-    @Field("bedroom_number")
-    private Integer bedroomNumber; 
-
-    @Field("bathroom_number")
-    private Integer bathroomNumber; 
-
-    @Field("direction")
-    private String direction; 
-
-    @Field("law")
-    private Integer law; 
-
-    @Field("price")
-    private Double price; 
-
-    public House() {
-    }
-
-    public House(Integer area, String address, Integer streetInFrontOfHouse, Double width,
-            Integer height, Integer floorNumber, Integer bedroomNumber,
-            Integer bathroomNumber, String direction, Integer law, Double price) {
-        this.area = area;
-        this.address = address;
-        this.streetInFrontOfHouse = streetInFrontOfHouse;
-        this.width = width;
-        this.height = height;
-        this.floorNumber = floorNumber;
-        this.bedroomNumber = bedroomNumber;
-        this.bathroomNumber = bathroomNumber;
-        this.direction = direction;
-        this.law = law;
-        this.price = price;
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    private String address;
+    private Integer streetInFrontOfHouse;
+    private Double width;
+    private Integer height;
+    private Integer floorNumber;
+    private Integer bedroomNumber;
+    private Integer bathroomNumber;
+    private String direction;
+    private Integer law;
+    private Double price;
+    public HouseDTO() {
     }
 
     public Integer getArea() {
