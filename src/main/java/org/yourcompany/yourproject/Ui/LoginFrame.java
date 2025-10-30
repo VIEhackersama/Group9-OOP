@@ -16,7 +16,7 @@ public class LoginFrame extends JFrame {
     public LoginFrame(ArrayList<User> users) {
         this.users = users;
         setTitle("Đăng nhập");
-        setSize(350, 250);
+        setSize(550, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(4, 2, 10, 10));
