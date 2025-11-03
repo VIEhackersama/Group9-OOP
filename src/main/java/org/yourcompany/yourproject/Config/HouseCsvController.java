@@ -22,12 +22,9 @@ public class HouseCsvController {
         String line = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-
             br.readLine();
-
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-
                 if (values.length == 11) {
                     try {
                         Integer area = Integer.parseInt(values[0].trim());

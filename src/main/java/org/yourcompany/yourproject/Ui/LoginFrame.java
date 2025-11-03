@@ -52,9 +52,10 @@ public class LoginFrame extends JFrame {
         }
 
         for (User u : users) {
+            //  Dùng PasswordUtil để kiểm tra
             if (u.getEmail().equals(email) && PasswordUtil.checkPassword(password, u.getPassword())) {
                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + u.getName());
-
+                // Mở MarketFrame và đóng cửa sổ hiện tại**
                 new MarketFrame(u).setVisible(true);
                 dispose();
                 return;

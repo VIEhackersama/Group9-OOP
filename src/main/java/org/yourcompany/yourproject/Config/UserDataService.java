@@ -14,17 +14,17 @@ public class UserDataService {
     private static final String USER_FILE = "users.json";
     private Gson gson;
     public UserDataService() {
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();// Cấu hình Gson để format data 
     }
 
-    public ArrayList<User> loadUsers() {
+    public ArrayList<User> loadUsers() { // Tải danh sách user từ file JSON
         try (FileReader reader = new FileReader(USER_FILE)) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
             ArrayList<User> users = gson.fromJson(reader, userListType);
             return users != null ? users : new ArrayList<>();
         } catch (IOException e) {
-            return new ArrayList<>();
+            return new ArrayList<>();// Nếu file không tồn tại, trả về list rỗng
         }
     }
     public void saveUsers(ArrayList<User> users) {

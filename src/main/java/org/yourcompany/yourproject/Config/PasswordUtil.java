@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 public class PasswordUtil {
-
+    // Hash một mật khẩu bằng SHA-256
     public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -20,8 +20,9 @@ public class PasswordUtil {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Lỗi khi hash mật khẩu", e);
         }
-    }
-
+    }   
+    
+    // Kiểm tra mật khẩu thô có khớp với mật khẩu đã hash
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         String hashedAttempt = hashPassword(plainPassword);
         return hashedAttempt.equals(hashedPassword);
