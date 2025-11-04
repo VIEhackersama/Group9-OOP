@@ -1,0 +1,11 @@
+# Bỏ qua các file biên dịch của Java/Maven
+/target/
+*.class
+
+# Bỏ qua các file cấu hình của IntelliJ
+.idea/
+*.iml
+
+# Bỏ qua file rác của OS
+.DS_Store
+Thumbs.db
