@@ -29,9 +29,9 @@ public class HouseCsvController {
                     try {
                         Integer area = Integer.parseInt(values[0].trim());
                         String address = values[1].trim();
-                        Integer streetInFrontOfHouse = Integer.parseInt(values[2].trim());
+                        Double streetInFrontOfHouse = Double.parseDouble(values[2].trim());
                         Double width = Double.parseDouble(values[3].trim());
-                        Integer height = Integer.parseInt(values[4].trim());
+                        Double height = Double.parseDouble(values[4].trim());
                         Integer floorNumber = Integer.parseInt(values[5].trim());
                         Integer bedroomNumber = Integer.parseInt(values[6].trim());
                         Integer bathroomNumber = Integer.parseInt(values[7].trim());
