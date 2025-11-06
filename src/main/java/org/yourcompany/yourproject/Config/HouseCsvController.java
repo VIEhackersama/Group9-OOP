@@ -27,7 +27,7 @@ public class HouseCsvController {
                 String[] values = line.split(",");
                 if (values.length == 11) {
                     try {
-                        Integer area = Integer.parseInt(values[0].trim());
+                        Double area = Integer.parseInt(values[0].trim());
                         String address = values[1].trim();
                         Double streetInFrontOfHouse = Double.parseDouble(values[2].trim());
                         Double width = Double.parseDouble(values[3].trim());
