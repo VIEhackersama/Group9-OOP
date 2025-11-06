@@ -18,10 +18,8 @@ import org.yourcompany.yourproject.Ui.LoginFrame;
 public class App { 
 
     public static void main(String[] args) {
-       UserDataService userDataService = new UserDataService();
-        ArrayList<User> users = userDataService.loadUsers();
         SwingUtilities.invokeLater(() -> {
-            new LoginFrame(users).setVisible(true);
+            new LoginFrame().setVisible(true);
         });
     }
     // public static void main(String[] args) {

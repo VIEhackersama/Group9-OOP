@@ -2,33 +2,35 @@ package org.yourcompany.yourproject.Ui;
 
 import javax.swing.*;
 import org.yourcompany.yourproject.Entity.User;
-import org.yourcompany.yourproject.Config.PasswordUtil; 
-import org.yourcompany.yourproject.Config.UserDataService; 
+import org.yourcompany.yourproject.Config.PasswordUtil;
+import org.yourcompany.yourproject.Config.UserDataService;
 
 import java.awt.*;
-import java.util.ArrayList;
+// import java.util.ArrayList; // Bỏ
 import java.util.regex.Pattern;
 
 public class RegisterFrame extends JFrame {
     private JTextField nameField, emailField, phoneField, addressField;
     private JPasswordField passwordField;
-    private ArrayList<User> users;
-    private UserDataService userDataService; 
+    // private ArrayList<User> users; // Bỏ
+    private UserDataService userDataService; // Dùng service
 
     // Pattern để kiểm tra email
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
             "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
 
-    public RegisterFrame(ArrayList<User> users) {
-        this.users = users;
-        this.userDataService = new UserDataService(); 
+    // Constructor không cần ArrayList<User>
+    public RegisterFrame(/* ArrayList<User> users */) {
+        // this.users = users; // Bỏ
+        this.userDataService = new UserDataService(); // Khởi tạo service
         setTitle("Đăng ký");
-        setSize(400, 350); 
+        setSize(400, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(new GridLayout(7, 2, 10, 10)); 
+        setLayout(new GridLayout(7, 2, 10, 10));
         ((JPanel) getContentPane()).setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
+        // ... (Toàn bộ phần add component GUI giữ nguyên) ...
         add(new JLabel("Tên (*):"));
         nameField = new JTextField();
         add(nameField);
@@ -49,13 +51,12 @@ public class RegisterFrame extends JFrame {
         JButton backBtn = new JButton("Quay lại");
         add(registerBtn);
         add(backBtn);
-
         add(new JLabel("(*) là thông tin bắt buộc"));
         add(new JLabel(""));
 
         registerBtn.addActionListener(e -> register());
         backBtn.addActionListener(e -> {
-            new LoginFrame(users).setVisible(true);
+            new LoginFrame().setVisible(true); // Không cần truyền 'users'
             dispose();
         });
     }
@@ -67,45 +68,42 @@ public class RegisterFrame extends JFrame {
         String address = addressField.getText().trim();
         String password = new String(passwordField.getPassword());
 
-        //  Kiểm tra thông tin bắt buộc
+        // Kiểm tra thông tin bắt buộc
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ Tên, Email, và Mật khẩu!", "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        //  Kiểm tra định dạng email
+        // Kiểm tra định dạng email
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             JOptionPane.showMessageDialog(this, "Email không đúng định dạng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        //  Kiểm tra email đã tồn tại chưa
-        for (User u : users) {
-            if (u.getEmail().equalsIgnoreCase(email)) {
-                JOptionPane.showMessageDialog(this, "Email này đã được sử dụng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        // Kiểm tra email đã tồn tại chưa (dùng service)
+        if (userDataService.findUserByEmail(email) != null) {
+            JOptionPane.showMessageDialog(this, "Email này đã được sử dụng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        //  Hash mật khẩu
+        // Hash mật khẩu
         String hashedPassword = PasswordUtil.hashPassword(password);
 
-        //  Tạo ID mới
-        int id = users.isEmpty() ? 1 : users.get(users.size() - 1).getId() + 1;
+        // Tạo ID mới (dùng service)
+        int id = userDataService.getNextUserId();
 
-        //  Thêm user mới vào list
+        // Tạo user mới
         User newUser = new User(id, name, email, phone, address, hashedPassword);
-        users.add(newUser);
 
-        //  Lưu danh sách mới vào file JSON
-        userDataService.saveUsers(users);
+        // Lưu user mới vào DB (dùng service)
+        userDataService.saveUser(newUser);
 
         JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công",
                 JOptionPane.INFORMATION_MESSAGE);
 
-        //  Quay lại trang Login
-        new LoginFrame(users).setVisible(true);
+        // Quay lại trang Login
+        new LoginFrame().setVisible(true); // Không cần truyền 'users'
         dispose();
     }
 }
