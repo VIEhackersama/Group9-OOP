@@ -7,7 +7,6 @@ import java.awt.*;
 public class MarketFrame extends JFrame {
 
     private User loggedInUser;
-
     public MarketFrame(User user) {
         this.loggedInUser = user;
 

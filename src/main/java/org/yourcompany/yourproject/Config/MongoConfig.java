@@ -28,8 +28,7 @@ public class MongoConfig {
         try (InputStream input = App.class.getResourceAsStream(PROPERTIES_FILE)) {
             Properties prop = new Properties();
             if (input == null) {
-                System.err.println("Không tìm thấy file " + PROPERTIES_FILE);
-                throw new RuntimeException("Không tìm thấy file properties");
+                throw new RuntimeException("Couldn't find the properties");
             }
             prop.load(input);
             String uri = prop.getProperty("mongodb.uri");
@@ -50,11 +49,9 @@ public class MongoConfig {
             mongoClient = MongoClients.create(settings);
             database = mongoClient.getDatabase(dbName);
 
-            System.out.println("Kết nối thành công tới database: " + dbName);
-
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Không thể khởi tạo kết nối MongoDB", e);
+            throw new RuntimeException("DB error", e);
         }
     }
 
