@@ -2,18 +2,23 @@ package org.yourcompany.yourproject.Ui;
 
 import javax.swing.*;
 import org.yourcompany.yourproject.Entity.User;
-import org.yourcompany.yourproject.Config.PasswordUtil; 
+import org.yourcompany.yourproject.Config.PasswordUtil;
+import org.yourcompany.yourproject.Config.UserDataService; // Import service mới
 
 import java.awt.*;
-import java.util.ArrayList;
+// import java.util.ArrayList; // Không còn dùng ArrayList
 
 public class LoginFrame extends JFrame {
     private JTextField emailField;
     private JPasswordField passwordField;
-    private ArrayList<User> users;
+    // private ArrayList<User> users; // Bỏ
+    private UserDataService userDataService; // Dùng service
 
-    public LoginFrame(ArrayList<User> users) {
-        this.users = users;
+    // Constructor không cần ArrayList<User> nữa
+    public LoginFrame(/* ArrayList<User> users */) {
+        // this.users = users; // Bỏ
+        this.userDataService = new UserDataService(); // Khởi tạo service
+
         setTitle("Đăng nhập");
         setSize(550, 350);
         setLocationRelativeTo(null);
@@ -37,13 +42,13 @@ public class LoginFrame extends JFrame {
 
         loginBtn.addActionListener(e -> login());
         registerBtn.addActionListener(e -> {
-            new RegisterFrame(users).setVisible(true);
-            dispose(); 
+            new RegisterFrame().setVisible(true); // Không cần truyền 'users'
+            dispose();
         });
     }
 
     private void login() {
-        String email = emailField.getText();
+        String email = emailField.getText().trim(); // Thêm .trim()
         String password = new String(passwordField.getPassword());
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -51,16 +56,19 @@ public class LoginFrame extends JFrame {
             return;
         }
 
-        for (User u : users) {
-            //  Dùng PasswordUtil để kiểm tra
-            if (u.getEmail().equals(email) && PasswordUtil.checkPassword(password, u.getPassword())) {
-                JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + u.getName());
-                // Mở MarketFrame và đóng cửa sổ hiện tại**
-                new MarketFrame(u).setVisible(true);
-                dispose();
-                return;
-            }
+        // Tìm user trong DB thay vì duyệt list
+        User user = userDataService.findUserByEmail(email);
+
+        // Kiểm tra user có tồn tại và mật khẩu có khớp không
+        if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + user.getName());
+            // Mở MarketFrame và đóng cửa sổ hiện tại
+            // new MarketFrame(user).setVisible(true); // Giữ nguyên logic của bạn
+            dispose();
+            return;
         }
+
+        // Nếu user == null hoặc sai mật khẩu
         JOptionPane.showMessageDialog(this, "Sai email hoặc mật khẩu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
 }
