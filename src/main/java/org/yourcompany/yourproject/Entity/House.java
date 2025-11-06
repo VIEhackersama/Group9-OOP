@@ -3,11 +3,11 @@ package org.yourcompany.yourproject.Entity;
 public class House {
 
     private String id;
-    private Integer area;
+    private Double area;
     private String address;
-    private Integer streetInFrontOfHouse;
+    private Double streetInFrontOfHouse;
     private Double width;
-    private Integer height;
+    private Double height;
     private Integer floorNumber;
     private Integer bedroomNumber;
     private Integer bathroomNumber;
@@ -18,8 +18,8 @@ public class House {
     public House() {
     }
 
-    public House(Integer area, String address, Integer streetInFrontOfHouse, Double width,
-            Integer height, Integer floorNumber, Integer bedroomNumber,
+    public House(Double area, String address, Double streetInFrontOfHouse, Double width,
+            Double height, Integer floorNumber, Integer bedroomNumber,
             Integer bathroomNumber, String direction, Integer law, Double price) {
         this.area = area;
         this.address = address;
@@ -42,11 +42,11 @@ public class House {
         this.id = id;
     }
 
-    public Integer getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
@@ -58,11 +58,11 @@ public class House {
         this.address = address;
     }
 
-    public Integer getStreetInFrontOfHouse() {
+    public Double getStreetInFrontOfHouse() {
         return streetInFrontOfHouse;
     }
 
-    public void setStreetInFrontOfHouse(Integer streetInFrontOfHouse) {
+    public void setStreetInFrontOfHouse(Double streetInFrontOfHouse) {
         this.streetInFrontOfHouse = streetInFrontOfHouse;
     }
 
@@ -74,11 +74,11 @@ public class House {
         this.width = width;
     }
 
-    public Integer getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
