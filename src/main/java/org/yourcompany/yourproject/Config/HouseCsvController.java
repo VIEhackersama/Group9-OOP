@@ -13,8 +13,7 @@ public class HouseCsvController {
 
     /**
      * Phương thức chính để đọc file CSV và trả về danh sách các đối tượng House.
-     * 
-     * @param filePath Đường dẫn đến file CSV (có thể thay đổi)
+     * * @param filePath Đường dẫn đến file CSV (phải chứa 15 cột)
      * @return Danh sách các ngôi nhà
      */
     public List<House> loadHousesFromCsv(String filePath) {
@@ -25,7 +24,8 @@ public class HouseCsvController {
             br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values.length == 11) {
+
+                if (values.length == 15) {
                     try {
                         Integer area = Integer.parseInt(values[0].trim());
                         String address = values[1].trim();
@@ -38,16 +38,22 @@ public class HouseCsvController {
                         String direction = values[8].trim();
                         Integer law = Integer.parseInt(values[9].trim());
                         Double price = Double.parseDouble(values[10].trim());
-
+                        Double room_density = Double.parseDouble(values[11].trim());
+                        Double bath_per_bed = Double.parseDouble(values[12].trim());
+                        Double wide_ratio = Double.parseDouble(values[13].trim());
+                        Double distance_center = Double.parseDouble(values[14].trim());
                         House house = new House(area, address, streetInFrontOfHouse, width, height,
-                                floorNumber, bedroomNumber, bathroomNumber, direction, law, price);
+                                floorNumber, bedroomNumber, bathroomNumber, direction, law, price,
+                                room_density, bath_per_bed, wide_ratio, distance_center);
+
                         houses.add(house);
 
                     } catch (NumberFormatException e) {
-                        System.err.println("Type error: " + line);
+                        System.err.println("Type error (lỗi kiểu dữ liệu): " + line);
                     }
                 } else {
-                    System.err.println("Format error: " + line);
+                    // Cập nhật thông báo lỗi để rõ ràng hơn
+                    System.err.println("Format error (mong đợi 15 cột, nhận được " + values.length + "): " + line);
                 }
             }
         } catch (FileNotFoundException e) {

@@ -1,11 +1,5 @@
-# Bỏ qua các file biên dịch của Java/Maven
-/target/
+# Compiled Java files
 *.class
 
-# Bỏ qua các file cấu hình của IntelliJ
-.idea/
-*.iml
-
-# Bỏ qua file rác của OS
-.DS_Store
-Thumbs.db
+# Maven/Gradle build output
+target/

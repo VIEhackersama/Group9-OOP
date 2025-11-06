@@ -14,13 +14,19 @@ public class House {
     private String direction;
     private Integer law;
     private Double price;
+    private Double room_density;
+    private Double bath_per_bed;
+    private Double wide_ratio;      // ti le chieu ngang voi chieu dai
+    private Double distance_center;   // quang duong den trung tam thanh pho
 
     public House() {
     }
 
     public House(Integer area, String address, Integer streetInFrontOfHouse, Double width,
-            Integer height, Integer floorNumber, Integer bedroomNumber,
-            Integer bathroomNumber, String direction, Integer law, Double price) {
+                 Integer height, Integer floorNumber, Integer bedroomNumber,
+                 Integer bathroomNumber, String direction, Integer law, Double price,
+                 Double room_density, Double bath_per_bed, Double wide_ratio, Double distance_center) {
+
         this.area = area;
         this.address = address;
         this.streetInFrontOfHouse = streetInFrontOfHouse;
@@ -32,8 +38,13 @@ public class House {
         this.direction = direction;
         this.law = law;
         this.price = price;
+        this.room_density = room_density;
+        this.bath_per_bed = bath_per_bed;
+        this.wide_ratio = wide_ratio;
+        this.distance_center = distance_center;
     }
 
+    // --- CÁC GETTER/SETTER CŨ (Giữ nguyên) ---
     public String getId() {
         return id;
     }
@@ -129,7 +140,39 @@ public class House {
     public void setPrice(Double price) {
         this.price = price;
     }
-    
+
+    public Double getRoom_density() {
+        return room_density;
+    }
+
+    public void setRoom_density(Double room_density) {
+        this.room_density = room_density;
+    }
+
+    public Double getBath_per_bed() {
+        return bath_per_bed;
+    }
+
+    public void setBath_per_bed(Double bath_per_bed) {
+        this.bath_per_bed = bath_per_bed;
+    }
+
+    public Double getWide_ratio() {
+        return wide_ratio;
+    }
+
+    public void setWide_ratio(Double wide_ratio) {
+        this.wide_ratio = wide_ratio;
+    }
+
+    public Double getDistance_center() {
+        return distance_center;
+    }
+
+    public void setDistance_center(Double distance_center) {
+        this.distance_center = distance_center;
+    }
+
     @Override
     public String toString() {
         return "House{" +
