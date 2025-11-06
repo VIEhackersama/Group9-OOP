@@ -18,7 +18,7 @@ public class PasswordUtil {
             }
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Lỗi khi hash mật khẩu", e);
+            throw new RuntimeException("Error occured when hash", e);
         }
     }   
     

@@ -56,7 +56,6 @@ public class LoginFrame extends JFrame {
             return;
         }
 
-        // Tìm user trong DB thay vì duyệt list
         User user = userDataService.findUserByEmail(email);
 
         // Kiểm tra user có tồn tại và mật khẩu có khớp không
@@ -68,7 +67,6 @@ public class LoginFrame extends JFrame {
             return;
         }
 
-        // Nếu user == null hoặc sai mật khẩu
         JOptionPane.showMessageDialog(this, "Sai email hoặc mật khẩu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
 }
