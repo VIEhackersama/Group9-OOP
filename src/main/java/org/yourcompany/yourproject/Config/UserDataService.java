@@ -1,37 +1,58 @@
 package org.yourcompany.yourproject.Config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.client.model.ReturnDocument;
+import com.mongodb.client.model.Updates;
 import org.yourcompany.yourproject.Entity.User;
+import org.bson.Document;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 public class UserDataService {
-    private static final String USER_FILE = "users.json";
-    private Gson gson;
+
+    private MongoCollection<User> userCollection;
+    private MongoCollection<Document> countersCollection;
+
     public UserDataService() {
-        this.gson = new GsonBuilder().setPrettyPrinting().create();// Cấu hình Gson để format data 
+        this.userCollection = MongoConfig.getUserCollection();
+        this.countersCollection = MongoConfig.getCountersCollection();
+
+
+        if (countersCollection.find(Filters.eq("_id", "userId")).first() == null) {
+            countersCollection.insertOne(new Document("_id", "userId").append("seq", 0));
+        }
     }
 
-    public ArrayList<User> loadUsers() { // Tải danh sách user từ file JSON
-        try (FileReader reader = new FileReader(USER_FILE)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            ArrayList<User> users = gson.fromJson(reader, userListType);
-            return users != null ? users : new ArrayList<>();
-        } catch (IOException e) {
-            return new ArrayList<>();// Nếu file không tồn tại, trả về list rỗng
-        }
+    /**
+     * 
+     * @param email Email cần tìm.
+     * @return Đối tượng User nếu tìm thấy, ngược lại trả về null.
+     */
+    public User findUserByEmail(String email) {
+        // Tương đương với: SELECT * FROM users WHERE email = ? LIMIT 1
+        return userCollection.find(Filters.eq("email", email)).first();
     }
-    public void saveUsers(ArrayList<User> users) {
-        try (FileWriter writer = new FileWriter(USER_FILE)) {
-            gson.toJson(users, writer);
-        } catch (IOException e) {
-            System.err.println("Error while saving file: " + e.getMessage());
-        }
+
+    /**
+     * Lưu một user mới vào database.
+     * 
+     * @param user Đối tượng User cần lưu.
+     */
+    public void saveUser(User user) {
+        userCollection.insertOne(user);
     }
+
+    /**
+     * Lấy ID tiếp theo cho user, đảm bảo không trùng lặp.
+     * 
+     * @return Một số int ID tiếp theo.
+     */
+    public int getNextUserId() {
+        Document counter = countersCollection.findOneAndUpdate(
+                Filters.eq("_id", "userId"),
+                Updates.inc("seq", 1),
+                new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
+        return counter.getInteger("seq");
+    }
+
 }
