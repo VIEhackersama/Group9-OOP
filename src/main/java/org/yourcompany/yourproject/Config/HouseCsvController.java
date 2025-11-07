@@ -21,7 +21,7 @@ public class HouseCsvController {
         String line = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            br.readLine();
+            br.readLine(); // Bỏ qua dòng tiêu đề
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
 
@@ -29,9 +29,9 @@ public class HouseCsvController {
                     try {
                         Integer area = Integer.parseInt(values[0].trim());
                         String address = values[1].trim();
-                        Integer streetInFrontOfHouse = Integer.parseInt(values[2].trim());
+                        Double streetInFrontOfHouse = Double.parseDouble(values[2].trim());
                         Double width = Double.parseDouble(values[3].trim());
-                        Integer height = Integer.parseInt(values[4].trim());
+                        Double height = Double.parseDouble(values[4].trim());
                         Integer floorNumber = Integer.parseInt(values[5].trim());
                         Integer bedroomNumber = Integer.parseInt(values[6].trim());
                         Integer bathroomNumber = Integer.parseInt(values[7].trim());
@@ -42,6 +42,7 @@ public class HouseCsvController {
                         Double bath_per_bed = Double.parseDouble(values[12].trim());
                         Double wide_ratio = Double.parseDouble(values[13].trim());
                         Double distance_center = Double.parseDouble(values[14].trim());
+
                         House house = new House(area, address, streetInFrontOfHouse, width, height,
                                 floorNumber, bedroomNumber, bathroomNumber, direction, law, price,
                                 room_density, bath_per_bed, wide_ratio, distance_center);
