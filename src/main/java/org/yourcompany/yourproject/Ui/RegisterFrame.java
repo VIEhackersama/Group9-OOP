@@ -20,18 +20,14 @@ public class RegisterFrame extends JFrame {
     public RegisterFrame() {
         this.userDataService = new UserDataService();
         setTitle("Đăng ký tài khoản");
-
-        // **THAY ĐỔI:** Giảm chiều cao cửa sổ để các nút bấm lùi xuống
-        setSize(450, 450);
-
+        setSize(450, 450); // Kích thước cửa sổ
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         setLayout(new BorderLayout());
-        getContentPane().setBackground(Color.WHITE);
+        getContentPane().setBackground(Color.WHITE); // Nền cửa sổ màu trắng
 
         // --- 2. TIÊU ĐỀ (NORTH) ---
-        // (Giữ nguyên)
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         northPanel.setBackground(Color.WHITE);
@@ -52,24 +48,26 @@ public class RegisterFrame extends JFrame {
         add(northPanel, BorderLayout.NORTH);
 
         // --- 3. PANEL NỘI DUNG CHÍNH (CENTER) ---
-        // (Giữ nguyên)
+        // Panel này chứa CẢ HỘP XÁM và CÁC NÚT BẤM
         JPanel mainContentPanel = new JPanel(new BorderLayout());
         mainContentPanel.setBackground(Color.WHITE);
         add(mainContentPanel, BorderLayout.CENTER);
 
         // --- HỘP FORM MÀU XÁM (Đặt ở phía BẮC của mainContentPanel) ---
-        // (Giữ nguyên)
+        // Sử dụng RoundedPanel với nền xám nhạt
         RoundedPanel roundedFormPanel = new RoundedPanel(new GridBagLayout(), 20, new Color(240, 242, 245));
         roundedFormPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
 
+        // Wrapper để căn giữa hộp xám
         JPanel formWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         formWrapper.setBackground(Color.WHITE);
         formWrapper.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         formWrapper.add(roundedFormPanel);
 
+        // Thêm wrapper (chứa hộp xám) vào VÙNG BẮC (NORTH) của panel chính
         mainContentPanel.add(formWrapper, BorderLayout.NORTH);
 
-        // ... (Code thêm các trường vào roundedFormPanel giữ nguyên) ...
+        // (Code thêm các trường vào roundedFormPanel)
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 8, 8, 8);
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -125,9 +123,9 @@ public class RegisterFrame extends JFrame {
 
 
         // --- 4. PANEL NÚT BẤM (Đặt ở VÙNG GIỮA của mainContentPanel) ---
-        // (Giữ nguyên)
+        // Panel này sẽ được căn giữa trong không gian còn lại
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 0));
-        buttonPanel.setOpaque(false);
+        buttonPanel.setOpaque(false); // Nền trắng
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
         JButton registerBtn = new RoundedButton("Đăng ký");
@@ -140,11 +138,11 @@ public class RegisterFrame extends JFrame {
         buttonPanel.add(registerBtn);
         buttonPanel.add(backBtn);
 
+        // Thêm panel nút vào VÙNG GIỮA (CENTER) của panel chính
         mainContentPanel.add(buttonPanel, BorderLayout.CENTER);
 
 
         // --- 5. ACTION LISTENERS ---
-        // (Giữ nguyên)
         registerBtn.addActionListener(e -> register());
         backBtn.addActionListener(e -> {
             new LoginFrame().setVisible(true);
@@ -152,7 +150,7 @@ public class RegisterFrame extends JFrame {
         });
     }
 
-    // Phương thức register() giữ nguyên, không thay đổi
+    // (Phương thức register() giữ nguyên)
     private void register() {
         String name = nameField.getText().trim();
         String email = emailField.getText().trim();

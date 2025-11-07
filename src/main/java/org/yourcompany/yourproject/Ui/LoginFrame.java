@@ -6,7 +6,6 @@ import org.yourcompany.yourproject.Entity.User;
 import org.yourcompany.yourproject.Config.PasswordUtil;
 import org.yourcompany.yourproject.Config.UserDataService;
 import java.awt.*;
-import java.util.Objects;
 
 public class LoginFrame extends JFrame {
 
@@ -18,8 +17,6 @@ public class LoginFrame extends JFrame {
         this.userDataService = new UserDataService();
 
         setTitle("Dự đoán giá nhà - Đăng nhập");
-
-        // **THAY ĐỔI: Tăng chiều rộng cửa sổ để vừa các nút**
         setSize(750, 400);
 
         setLocationRelativeTo(null);
@@ -29,7 +26,6 @@ public class LoginFrame extends JFrame {
         setLayout(new BorderLayout());
 
         // --- PHẦN HÌNH ẢNH (WEST) ---
-        // (Giữ nguyên)
         JLabel imageLabel = new JLabel();
         ImageIcon icon = new ImageIcon((getClass().getResource("/img.png")));
         Image img = icon.getImage().getScaledInstance(350, 400, Image.SCALE_SMOOTH);
@@ -37,8 +33,6 @@ public class LoginFrame extends JFrame {
         add(imageLabel, BorderLayout.WEST);
 
         // --- PHẦN FORM (CENTER) ---
-        // (Toàn bộ phần còn lại giữ nguyên)
-
         JPanel mainFormPanel = new JPanel(new GridBagLayout());
         mainFormPanel.setBackground(Color.WHITE);
         mainFormPanel.setBorder(new EmptyBorder(15, 15, 15, 15));

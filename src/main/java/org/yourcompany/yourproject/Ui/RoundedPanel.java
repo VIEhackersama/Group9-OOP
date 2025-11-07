@@ -1,4 +1,4 @@
-package org.yourcompany.yourproject.Ui; // Hoặc package khác tùy bạn đặt
+package org.yourcompany.yourproject.Ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,13 +70,13 @@ public class RoundedPanel extends JPanel {
         g2.fill(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, cornerRadius, cornerRadius));
 
         // Vẽ viền (tùy chọn)
+        // ví dụ
         // g2.setColor(Color.LIGHT_GRAY); // Hoặc màu viền bạn muốn
         // g2.draw(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, cornerRadius, cornerRadius));
 
         g2.dispose();
     }
 
-    // Override setBackground để cập nhật màu nền tùy chỉnh
     @Override
     public void setBackground(Color bg) {
         this.backgroundColor = bg;
