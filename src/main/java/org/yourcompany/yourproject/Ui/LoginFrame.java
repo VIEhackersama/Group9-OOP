@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
     private UserDataService userDataService;
     
     /**
@@ -172,56 +171,25 @@ public class LoginFrame extends javax.swing.JFrame {
         String email = txtEmail.getText().trim();
         String password = new String(txtPassword.getPassword());
 
-        // 1. Find user by email
         User user = userDataService.findUserByEmail(email);
 
-        // 2. Check if user exists AND password is correct
         if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
-            // Success
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + user.getName());
-            new MarketFrame(user).setVisible(true); // Open Market
-            this.dispose(); // Close Login
+            new MarketFrame(user).setVisible(true);
+            this.dispose();
         } else {
-            // Failure
             JOptionPane.showMessageDialog(this, "Sai email hoặc mật khẩu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // Open the Register frame
         new RegisterFrame().setVisible(true);
-        // Close this Login frame
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginFrame().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

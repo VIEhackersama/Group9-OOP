@@ -19,13 +19,13 @@ import org.yourcompany.yourproject.Ui.LoginFrame;
 public class App { 
 
     public static void main(String[] args) {
-        // SwingUtilities.invokeLater(() -> {
-        //     new LoginFrame().setVisible(true);
-        // });
-        HouseMongoController mongoController = new HouseMongoController();
+        SwingUtilities.invokeLater(() -> {
+            new LoginFrame().setVisible(true);
+        });
+        /* HouseMongoController mongoController = new HouseMongoController();
         List<House> houseList = mongoController.loadHousesFromDb();
         for (House house : houseList) {
             System.out.println(house); 
-        }
+        } */
     }
 }

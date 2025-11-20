@@ -26,8 +26,7 @@ public class HouseMongoController {
 
     private void loadConfig() {
         Properties prop = new Properties();
-        String configFilePath = "src/main/java/org/yourcompany/yourproject/db.properties";
-        try (InputStream input = new java.io.FileInputStream(configFilePath)) {
+        try (InputStream input = HouseMongoController.class.getResourceAsStream("/db.properties")) {
             prop.load(input);
             this.connectionString = prop.getProperty("mongodb.uri");
             this.databaseName = prop.getProperty("mongodb.database");

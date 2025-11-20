@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class RegisterFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterFrame.class.getName());
     private UserDataService userDataService;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
     
@@ -184,70 +183,40 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        // 1. Get data from the (renamed) text fields
         String name = txtName.getText().trim();
         String email = txtEmail.getText().trim();
         String phone = txtPhone.getText().trim();
         String address = txtAddress.getText().trim();
         String password = new String(txtPassword.getPassword());
 
-        // 2. Check for empty required fields
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ Tên, Email, và Mật khẩu!", "Lỗi",
                     JOptionPane.ERROR_MESSAGE);
-            return; // Stop
+            return;
         }
 
-        // 3. Check email format
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             JOptionPane.showMessageDialog(this, "Email không đúng định dạng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Stop
+            return;
         }
 
-        // 4. Check if email already exists
         if (userDataService.findUserByEmail(email) != null) {
             JOptionPane.showMessageDialog(this, "Email này đã được sử dụng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return; // Stop
+            return;
         }
 
-        // 5. Hash password and save user
+        //Hash password and save user
         String hashedPassword = PasswordUtil.hashPassword(password);
         int id = userDataService.getNextUserId();
         User newUser = new User(id, name, email, phone, address, hashedPassword);
         userDataService.saveUser(newUser);
 
-        // 6. Show success and go back to Login
         JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công",
                 JOptionPane.INFORMATION_MESSAGE);
 
         new LoginFrame().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new RegisterFrame().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

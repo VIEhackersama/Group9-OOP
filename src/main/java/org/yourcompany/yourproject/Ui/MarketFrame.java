@@ -1,6 +1,6 @@
 package org.yourcompany.yourproject.Ui;
 
-
+import org.yourcompany.yourproject.Config.HouseMongoController;
 import org.yourcompany.yourproject.Config.HouseCsvController;
 import org.yourcompany.yourproject.Entity.House;
 import org.yourcompany.yourproject.Entity.User;
@@ -8,13 +8,11 @@ import org.yourcompany.yourproject.Entity.User;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.Objects;
 
 public class MarketFrame extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MarketFrame.class.getName());
     private User loggedInUser;
     private List<House> allHouses; 
     private DefaultListModel<House> houseListModel; 
@@ -27,17 +25,16 @@ public class MarketFrame extends javax.swing.JFrame {
     public MarketFrame(User user) {
         this.loggedInUser = user;
         initComponents(); 
-        // 2. Căn giữa màn hình
         this.setLocationRelativeTo(null);
 
-        // 3. QUAN TRỌNG: Nối biến logic của mình với biến giao diện của NetBeans
+        // Nối biến logic của mình với biến giao diện của NetBeans
         // Nếu thiếu dòng này -> Lỗi NullPointerException
         this.listScrollPane = jScrollPane1; 
 
-        // 4. Ẩn panel phụ
+        // Ẩn panel phụ
         extraDetailsPanel.setVisible(false);
         
-        // 5. Setup các thứ khác
+        //Setup các thứ khác
         lblWelcome.setText("Xin chào, " + loggedInUser.getName());
         lblEmail.setText(loggedInUser.getEmail());
 
@@ -48,31 +45,39 @@ public class MarketFrame extends javax.swing.JFrame {
         emptyListLabel.setFont(new Font("Segoe UI", Font.ITALIC, 14));
         emptyListLabel.setForeground(Color.GRAY);
 
-        addListeners();
-        
-        // 6. Cuối cùng: Tải dữ liệu
+        addListeners();        
         loadHouseData();
     }
     
     private void loadHouseData() {
-        HouseCsvController controller = new HouseCsvController();
+        /* HouseMongoController controller = new HouseMongoController();
         try {
-            // Lấy đường dẫn file CSV từ resource
-            String csvPath = Objects.requireNonNull(
-                    getClass().getResource("/muanhadat_data_adjusted.csv")).getPath();
+            // GỌI MONGODB
+            allHouses = controller.loadHousesFromDb();
+
+            // Kiểm tra null/rỗng
+            if (allHouses == null) {
+                allHouses = new ArrayList<>(); // Tránh lỗi null pointer
+                throw new Exception("Không thể kết nối hoặc lấy dữ liệu từ MongoDB.");
+            }
+            if (allHouses.isEmpty()) {
+                logger.warning("MongoDB trả về danh sách nhà trống.");
+            }
+        */
+        HouseCsvController csvController = new HouseCsvController();
+        try {
+            String csvPath = Objects.requireNonNull(getClass().getResource("/muanhadat_data_adjusted.csv")).getPath();
             
-            // Fix lỗi đường dẫn trên Windows
+            // Fix lỗi đường dẫn trên Windows (xóa dấu / ở đầu nếu có)
             if (System.getProperty("os.name").startsWith("Windows") && csvPath.startsWith("/")) {
                 csvPath = csvPath.substring(1);
             }
             
-            allHouses = controller.loadHousesFromCsv(csvPath);
+            allHouses = csvController.loadHousesFromCsv(csvPath);
 
             // Tạo bộ lọc duy nhất cho Phường và Hướng
-            Set<String> allPhuong = new TreeSet<>();
-            Set<String> allHuong = new TreeSet<>();
-            allPhuong.add("Tất cả");
-            allHuong.add("Tất cả");
+            Set<String> allPhuong = new java.util.HashSet<>();
+            Set<String> allHuong = new java.util.HashSet<>();
 
             for (House house : allHouses) {
                 if (house.getDirection() != null && !house.getDirection().isEmpty()) {
@@ -82,36 +87,47 @@ public class MarketFrame extends javax.swing.JFrame {
                     allPhuong.add(house.getAddress());
                 }
             }
+            
+            // Chuyển Set sang List để xử lý thứ tự
+            List<String> listPhuong = new java.util.ArrayList<>(allPhuong);
+            List<String> listHuong = new java.util.ArrayList<>(allHuong);
 
-            // Đổ dữ liệu vào ComboBox
-            cmbPhuong.setModel(new DefaultComboBoxModel<>(allPhuong.toArray(new String[0])));
-            cmbHuong.setModel(new DefaultComboBoxModel<>(allHuong.toArray(new String[0])));
+            boolean huongHasUnknown = listHuong.remove("Không xác định");
+            java.util.Collections.sort(listPhuong);
+            java.util.Collections.sort(listHuong);
+            listPhuong.add(0, "Tất cả");
+            listHuong.add(0, "Tất cả");
+            if (huongHasUnknown) {
+                listHuong.add("Không xác định");
+            }
+
+            cmbPhuong.setModel(new DefaultComboBoxModel<>(listPhuong.toArray(new String[0])));
+            cmbHuong.setModel(new DefaultComboBoxModel<>(listHuong.toArray(new String[0])));
 
             // Hiển thị danh sách lần đầu
             updateFilteredList();
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi tải dữ liệu: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Lỗi tải dữ liệu: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    // Hàm này sẽ được gọi khi bấm nút "Tìm" hoặc thay đổi ComboBox
+    // Hàm này sẽ được gọi khi thay đổi ComboBox
     private void updateFilteredList() {
-        // 1. Chỉ lấy giá trị từ 2 bộ lọc ComboBox
         String selectedPhuong = (String) cmbPhuong.getSelectedItem();
         String selectedHuong = (String) cmbHuong.getSelectedItem();
 
-        houseListModel.clear(); // Xóa danh sách cũ
+        houseListModel.clear(); // Xóa danh sách cũ trên giao diện
         
+        if (allHouses == null) return;
+
         for (House house : allHouses) {
             // Điều kiện 1: Phường
-            boolean phuongMatch = selectedPhuong.equals("Tất cả") || 
-                                  house.getAddress().equals(selectedPhuong);
+            boolean phuongMatch = selectedPhuong.equals("Tất cả") || house.getAddress().equals(selectedPhuong);
             
             // Điều kiện 2: Hướng
-            boolean huongMatch = selectedHuong.equals("Tất cả") || 
-                                 house.getDirection().equals(selectedHuong);
+            boolean huongMatch = selectedHuong.equals("Tất cả") || house.getDirection().equals(selectedHuong);
 
             // Nếu thỏa mãn cả 2 thì thêm vào danh sách
             if (phuongMatch && huongMatch) {
@@ -119,52 +135,53 @@ public class MarketFrame extends javax.swing.JFrame {
             }
         }
         
-        // Xử lý hiển thị khi rỗng
+        // Xử lý hiển thị: Nếu rỗng thì hiện Label, có dữ liệu thì hiện List
         if (houseListModel.isEmpty()) {
             listScrollPane.setViewportView(emptyListLabel);
         } else {
             listScrollPane.setViewportView(jListHouses);
         }
+        
+        // Xóa lựa chọn cũ và xóa trắng các ô nhập liệu
+        jListHouses.clearSelection();
+        clearDetailFields();
     }
     
     private void addListeners() {
+        // ListSelectionListener e
         jListHouses.addListSelectionListener(e -> {
-            // Kiểm tra xem sự kiện đã kết thúc chưa (quan trọng với JList)
             if (!e.getValueIsAdjusting()) {
                 House h = jListHouses.getSelectedValue();
+                // gọi getSelectedValue(): JList hỏi Selection Model dòng nào đang được chọn. JList chạy sang Data Model cho  xin vật thể ở vị trí đó rồi trả vật thể đó về cho biến h
                 if (h != null) {
-                    // Đổ dữ liệu vào 8 ô text field chính
+                    //
                     txtAddress.setText(h.getAddress());
                     txtPrice.setText(String.valueOf(h.getPrice()));
                     txtArea.setText(String.valueOf(h.getArea()));
                     txtStreet.setText(String.valueOf(h.getStreetInFrontOfHouse()));
                     txtWidth.setText(String.valueOf(h.getWidth()));
+                    
+                    // --- Đổ dữ liệu vào Panel Phụ (10 trường) ---
                     txtHeight.setText(String.valueOf(h.getHeight()));
                     txtFloor.setText(String.valueOf(h.getFloorNumber()));
                     txtBedroom.setText(String.valueOf(h.getBedroomNumber()));
-                    
-                    // Đổ dữ liệu vào 7 ô extra details (panel ẩn)
-                    // Bạn cần sửa các dòng này nếu tên biến không khớp
                     txtBathroom.setText(String.valueOf(h.getBathroomNumber()));
                     txtDirection.setText(h.getDirection());
+                    
                     txtLaw.setText(String.valueOf(h.getLaw()));
-                    // Các trường phân tích (đã được định dạng)
                     txtDistance.setText(String.format("%.2f", h.getDistance_center()));
                     txtDensity.setText(String.format("%.2f", h.getRoom_density()));
                     txtBathPerBed.setText(String.format("%.2f", h.getBath_per_bed()));
                     txtRatio.setText(String.format("%.2f", h.getWide_ratio()));
                 } else {
-                    // Nếu không có gì được chọn (đã xóa), thì dọn dẹp
                     clearDetailFields();
                 }
             }
         });
 
-        // --- 2. SỰ KIỆN BỘ LỌC (Khi thay đổi ComboBox) ---
         cmbPhuong.addActionListener(e -> updateFilteredList());
         cmbHuong.addActionListener(e -> updateFilteredList());
         
-        // --- 3. SỰ KIỆN NÚT (Đăng xuất) ---
         btnLogout.addActionListener(e -> {
             new LoginFrame().setVisible(true);
             this.dispose();
@@ -593,35 +610,6 @@ public class MarketFrame extends javax.swing.JFrame {
     private void txtFloorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFloorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFloorActionPerformed
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            // Create a fake user so we can run this file directly to test it
-            User dummyUser = new User(1, "Admin Test", "admin@test.com", "0000000000", "Hanoi", "123456");
-            new MarketFrame(dummyUser).setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
