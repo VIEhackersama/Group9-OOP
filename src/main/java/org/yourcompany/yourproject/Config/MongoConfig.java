@@ -25,7 +25,7 @@ public class MongoConfig {
     // Khối static này sẽ chạy một lần khi class được load
     // để thiết lập kết nối
     static {
-        try (InputStream input = App.class.getResourceAsStream(PROPERTIES_FILE)) {
+        try (InputStream input = App.class.getResourceAsStream("/" + PROPERTIES_FILE)) {
             Properties prop = new Properties();
             if (input == null) {
                 throw new RuntimeException("Couldn't find the properties");
