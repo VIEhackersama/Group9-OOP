@@ -1,9 +1,16 @@
 package org.yourcompany.yourproject.Entity;
 
-public class House {
+import ml.dmlc.xgboost4j.java.*;
+
+public interface RealEstate {
+    double predictPrice() throws Exception;
+}
+
+
+public class House implements RealEstate {
 
     private String id;
-    private Integer area;
+    private Double area;
     private String address;
     private Double streetInFrontOfHouse;
     private Double width;
@@ -22,12 +29,11 @@ public class House {
     public House() {
     }
 
-    public House(Integer area, String address, Double streetInFrontOfHouse, Double width,
+    public House(String address, Double streetInFrontOfHouse, Double width,
                  Double height, Integer floorNumber, Integer bedroomNumber,
-                 Integer bathroomNumber, String direction, Integer law, Double price,
-                 Double room_density, Double bath_per_bed, Double wide_ratio, Double distance_center) {
+                 Integer bathroomNumber, String direction, Double distance_center) {
 
-        this.area = area;
+        this.area = width * height;
         this.address = address;
         this.streetInFrontOfHouse = streetInFrontOfHouse;
         this.width = width;
@@ -36,11 +42,9 @@ public class House {
         this.bedroomNumber = bedroomNumber;
         this.bathroomNumber = bathroomNumber;
         this.direction = direction;
-        this.law = law;
-        this.price = price;
-        this.room_density = room_density;
-        this.bath_per_bed = bath_per_bed;
-        this.wide_ratio = wide_ratio;
+        this.room_density = (double) this.bedroomNumber / this.area;
+        this.bath_per_bed = this.bedroomNumber / (double)(this.bedroomNumber + 1);
+        this.wide_ratio = this.width / this.height;
         this.distance_center = distance_center;
     }
 
@@ -125,44 +129,16 @@ public class House {
         this.direction = direction;
     }
 
-    public Integer getLaw() {
-        return law;
-    }
-
-    public void setLaw(Integer law) {
-        this.law = law;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public Double getRoom_density() {
         return room_density;
-    }
-
-    public void setRoom_density(Double room_density) {
-        this.room_density = room_density;
     }
 
     public Double getBath_per_bed() {
         return bath_per_bed;
     }
 
-    public void setBath_per_bed(Double bath_per_bed) {
-        this.bath_per_bed = bath_per_bed;
-    }
-
     public Double getWide_ratio() {
         return wide_ratio;
-    }
-
-    public void setWide_ratio(Double wide_ratio) {
-        this.wide_ratio = wide_ratio;
     }
 
     public Double getDistance_center() {
@@ -180,5 +156,32 @@ public class House {
                 ", address='" + address + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+
+    // Dự đoán giá nhà (Minh)-------------------------------------------------
+     @Override
+    public double predictPrice() throws Exception {
+
+        Booster booster = XGBoost.loadModel("models/house_price.json");
+
+        // CHÚ Ý: address và direction đã là INTEGER (encode sẵn)
+        float[][] input = new float[][]{
+            {
+                this.addressToInt(),                    // address
+                this.streetInFrontOfHouse.floatValue(),// street
+                this.width.floatValue(),               // width
+                this.height.floatValue(),              // height
+                this.floorNumber.floatValue(),         // floor
+                this.bedroomNumber.floatValue(),       // bedroom
+                this.bathroomNumber.floatValue(),      // bathroom
+                this.directionToInt()                  // direction
+            }
+        };
+         DMatrix dmatrix = new DMatrix(input, 1, 8);
+        float[][] preds = booster.predict(dmatrix);
+
+        this.price = (double) preds[0][0];
+        return this.price;
     }
 }
