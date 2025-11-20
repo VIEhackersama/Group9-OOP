@@ -12,10 +12,11 @@ org\yourcompany\yourproject\Ui\LoginFrame$3.class
 org\yourcompany\yourproject\Ui\MarketFrame.class
 org\yourcompany\yourproject\Config\MongoConfig.class
 org\yourcompany\yourproject\Ui\MarketFrame$2.class
-org\yourcompany\yourproject\Config\HouseCsvController.class
+org\yourcompany\yourproject\Config\HouseMongoController.class
 org\yourcompany\yourproject\Ui\RegisterFrame$2.class
 org\yourcompany\yourproject\Ui\RegisterFrame.class
 org\yourcompany\yourproject\Ui\MarketFrame$4.class
+org\yourcompany\yourproject\Entity\RealEstate.class
 org\yourcompany\yourproject\Ui\ImagePanel.class
 org\yourcompany\yourproject\Entity\House.class
 org\yourcompany\yourproject\Ui\LoginFrame$2.class

@@ -2,7 +2,7 @@ package org.yourcompany.yourproject.Entity;
 
 import ml.dmlc.xgboost4j.java.*;
 
-public interface RealEstate {
+interface RealEstate {
     double predictPrice() throws Exception;
 }
 
@@ -57,11 +57,11 @@ public class House implements RealEstate {
         this.id = id;
     }
 
-    public Integer getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
@@ -163,11 +163,10 @@ public class House implements RealEstate {
      @Override
     public double predictPrice() throws Exception {
 
-        Booster booster = XGBoost.loadModel("models/house_price.json");
+        Booster booster = XGBoost.loadModel("D:\\java\\group-9\\Group9-OOP\\src\\main\\java\\org\\yourcompany\\yourproject\\Entity\\house_price_json.json");
 
         // CHÚ Ý: address và direction đã là INTEGER (encode sẵn)
-        float[][] input = new float[][]{
-            {
+        float[] input = new float[]{
                 this.addressToInt(),                    // address
                 this.streetInFrontOfHouse.floatValue(),// street
                 this.width.floatValue(),               // width
@@ -176,12 +175,34 @@ public class House implements RealEstate {
                 this.bedroomNumber.floatValue(),       // bedroom
                 this.bathroomNumber.floatValue(),      // bathroom
                 this.directionToInt()                  // direction
-            }
         };
          DMatrix dmatrix = new DMatrix(input, 1, 8);
         float[][] preds = booster.predict(dmatrix);
 
         this.price = (double) preds[0][0];
         return this.price;
+    }
+
+    private float addressToInt() {
+        if (this.address == null) return 0f;
+        return (float) Math.abs(this.address.hashCode() % 10000);
+    }
+
+    // Hàm mã hóa Hướng sang số
+    private float directionToInt() {
+        if (this.direction == null) return 0f;
+        String dir = this.direction.trim().toLowerCase();
+
+        switch (dir) {
+            case "đông": return 1f;
+            case "tây": return 2f;
+            case "nam": return 3f;
+            case "bắc": return 4f;
+            case "đông nam": return 5f;
+            case "đông bắc": return 6f;
+            case "tây nam": return 7f;
+            case "tây bắc": return 8f;
+            default: return 0f;
+        }
     }
 }
