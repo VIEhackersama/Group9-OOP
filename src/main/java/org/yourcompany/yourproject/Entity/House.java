@@ -1,6 +1,7 @@
 package org.yourcompany.yourproject.Entity;
 
 import ml.dmlc.xgboost4j.java.*;
+import java.util.*;
 
 interface RealEstate {
     double predictPrice() throws Exception;
@@ -25,6 +26,8 @@ public class House implements RealEstate {
     private Double bath_per_bed;
     private Double wide_ratio;      // ti le chieu ngang voi chieu dai
     private Double distance_center;   // quang duong den trung tam thanh pho
+    private static final Map<String, Integer> tierAddress = new HashMap<>();
+    private static final Map<String, Integer> tierDirection = new HashMap<>();
 
     public House() {
     }
@@ -43,7 +46,7 @@ public class House implements RealEstate {
         this.bathroomNumber = bathroomNumber;
         this.direction = direction;
         this.room_density = (double) this.bedroomNumber / this.area;
-        this.bath_per_bed = this.bedroomNumber / (double)(this.bedroomNumber + 1);
+        this.bath_per_bed = this.bathroomNumber / (double)(this.bedroomNumber + 1);
         this.wide_ratio = this.width / this.height;
         this.distance_center = distance_center;
     }
@@ -61,8 +64,8 @@ public class House implements RealEstate {
         return area;
     }
 
-    public void setArea(Double area) {
-        this.area = area;
+    private void recalcArea() {
+        this.area = this.width * this.height;
     }
 
     public String getAddress() {
@@ -87,6 +90,7 @@ public class House implements RealEstate {
 
     public void setWidth(Double width) {
         this.width = width;
+        recalcArea();
     }
 
     public Double getHeight() {
@@ -95,6 +99,7 @@ public class House implements RealEstate {
 
     public void setHeight(Double height) {
         this.height = height;
+        recalcArea();
     }
 
     public Integer getFloorNumber() {
@@ -159,50 +164,114 @@ public class House implements RealEstate {
     }
 
 
+    // chuyen doi address va direction sang int (Minh)
+    static {
+        tierAddress.put("Phường Ba Đình", 1);
+        tierAddress.put("Phường Đống Đa", 1);
+        tierAddress.put("Phường Bạch Mai", 1);
+        tierAddress.put("Phường Hai Bà Trưng", 1);
+
+        tierAddress.put("Phường Kim Liên", 2);
+        tierAddress.put("Phường Cầu Giấy", 2);
+        tierAddress.put("Phường Long Biên", 2);
+
+        tierAddress.put("Phường Thanh Xuân", 3);
+        tierAddress.put("Phường Thanh Xuân Nam", 3);
+        tierAddress.put("Phường Thanh Xuân Bắc", 3);
+        tierAddress.put("Phường Thanh Xuân Trung", 3);
+        tierAddress.put("Phường Thượng Đình", 3);
+        tierAddress.put("Phường Nghĩa Đô", 3);
+
+        tierAddress.put("Phường Vĩnh Tuy", 4);
+        tierAddress.put("Phường Tương Mai", 4);
+        tierAddress.put("Phường Lĩnh Nam", 4);
+        tierAddress.put("Phường Hoàng Mai", 4);
+        tierAddress.put("Phường Cầu Diễn", 4);
+        tierAddress.put("Phường Từ Liêm", 4);
+        tierAddress.put("Phường Việt Hưng", 4);
+        tierAddress.put("Phường Định Công", 4);
+        tierAddress.put("Phường Khương Mai", 4);
+        tierAddress.put("Phường Xuân Phương", 4);
+        tierAddress.put("Phường Phúc Lợi", 4);
+        tierAddress.put("Phường Phú Diễn", 4);
+        tierAddress.put("Phường Khương Đình", 4);
+
+        tierAddress.put("Phường Yên Sở", 5);
+        tierAddress.put("Phường Kiến Hưng", 5);
+        tierAddress.put("Phường Hoàng Liệt", 5);
+        tierAddress.put("Phường Vĩnh Hưng", 5);
+        tierAddress.put("Phường Dương Nội", 5);
+        tierAddress.put("Xã Hoài Đức", 5);
+        tierAddress.put("Xã Bình Minh", 5);
+        tierAddress.put("Phường Xuân Canh", 5);
+        tierAddress.put("Phường Hà Đông", 5);
+    }
+
+    static {
+        tierDirection.put("Không xác định", 0);
+
+        tierDirection.put("Tây - Bắc", 1);
+        tierDirection.put("Bắc", 1);
+        tierDirection.put("Tây", 1);
+
+        tierDirection.put("Đông - Bắc", 2);
+        tierDirection.put("Tây - Nam", 2);
+
+        tierDirection.put("Đông", 3);
+        tierDirection.put("Nam", 3);
+        tierDirection.put("Đông - Nam", 3);
+    }
+
+
+    public static int addresstoint(String address) {
+        return tierAddress.getOrDefault(address, -1);
+    }
+
+    public static int directiontoint(String direction) {
+        return tierDirection.getOrDefault(direction, -1);
+    }
+
+    // --- CÁC HÀM HỖ TRỢ UI (Lấy danh sách để hiển thị lên ComboBox) ---
+    public static Set<String> getAddressList() {
+        return tierAddress.keySet();
+    }
+
+    public static Set<String> getDirectionList() {
+        return tierDirection.keySet();
+    }
+
     // Dự đoán giá nhà (Minh)-------------------------------------------------
-     @Override
+    private static Booster booster;
+
+    @Override
     public double predictPrice() throws Exception {
+        if (booster == null) {
+            // path file là path đầy đủ (hỏi ai nó bảo thế ko chăc) - quang
+            booster = XGBoost.loadModel("D:\\java\\group-9\\Group9-OOP\\src\\main\\java\\org\\yourcompany\\yourproject\\Entity\\house_price_json.json");
+        }
 
-        Booster booster = XGBoost.loadModel("D:\\java\\group-9\\Group9-OOP\\src\\main\\java\\org\\yourcompany\\yourproject\\Entity\\house_price_json.json");
-
-        // CHÚ Ý: address và direction đã là INTEGER (encode sẵn)
         float[] input = new float[]{
-                this.addressToInt(),                    // address
-                this.streetInFrontOfHouse.floatValue(),// street
-                this.width.floatValue(),               // width
-                this.height.floatValue(),              // height
-                this.floorNumber.floatValue(),         // floor
-                this.bedroomNumber.floatValue(),       // bedroom
-                this.bathroomNumber.floatValue(),      // bathroom
-                this.directionToInt()                  // direction
+                this.area.floatValue(),
+                (float) addresstoint(this.address),      // Cast to float
+                this.streetInFrontOfHouse.floatValue(),
+                this.width.floatValue(),
+                this.height.floatValue(),
+                this.floorNumber.floatValue(),
+                this.bedroomNumber.floatValue(),
+                this.bathroomNumber.floatValue(),
+                (float) directiontoint(this.direction),  // Cast to float
+                this.room_density.floatValue(),
+                this.bath_per_bed.floatValue(),
+                this.wide_ratio.floatValue(),
+                this.distance_center.floatValue()
         };
-         DMatrix dmatrix = new DMatrix(input, 1, 8);
+
+        // FIX: Use input.length
+        DMatrix dmatrix = new DMatrix(input, 1, input.length);
+
         float[][] preds = booster.predict(dmatrix);
 
         this.price = (double) preds[0][0];
         return this.price;
-    }
-
-    private float addressToInt() {
-        if (this.address == null) return 0f;
-        return (float) Math.abs(this.address.hashCode() % 10000);
-    }
-
-    // Hàm mã hóa Hướng sang số
-    private float directionToInt() {
-        if (this.direction == null) return 0f;
-        String dir = this.direction.trim().toLowerCase();
-
-        switch (dir) {
-            case "đông": return 1f;
-            case "tây": return 2f;
-            case "nam": return 3f;
-            case "bắc": return 4f;
-            case "đông nam": return 5f;
-            case "đông bắc": return 6f;
-            case "tây nam": return 7f;
-            case "tây bắc": return 8f;
-            default: return 0f;
-        }
     }
 }
