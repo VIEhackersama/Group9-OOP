@@ -6,5 +6,13 @@
     "phonenumber": "",
     "address": "",
     "password": "d82494f05d6917ba02f7aaa29689ccb444bb73f20380876cb05d1f37537b7892"
+  },
+  {
+    "id": 2,
+    "name": "lenhathuy",
+    "email": "huyle4549@gmail.com",
+    "phonenumber": "0776262390",
+    "address": "Ha noi",
+    "password": "5cf47a742f19ae48588348676aafabc5a22f5c102a0c7e91ac80cc21fa5a6203"
   }
 ]
