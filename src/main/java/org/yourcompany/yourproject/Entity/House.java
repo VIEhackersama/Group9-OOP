@@ -235,7 +235,7 @@ public class House implements RealEstate {
      @Override
     public double predictPrice() throws Exception {
 
-        Booster booster = XGBoost.loadModel("house_price.json");
+        Booster booster = XGBoost.loadModel("house_price_json.json");
 
         float[][] input = new float[][]{
             {    
