@@ -26,8 +26,7 @@ public class HouseMongoController {
 
     private void loadConfig() {
         Properties prop = new Properties();
-        String configFilePath = "src/main/java/org/yourcompany/yourproject/db.properties";
-        try (InputStream input = new java.io.FileInputStream(configFilePath)) {
+        try (InputStream input = HouseMongoController.class.getResourceAsStream("/db.properties")) {
             prop.load(input);
             this.connectionString = prop.getProperty("mongodb.uri");
             this.databaseName = prop.getProperty("mongodb.database");
@@ -54,9 +53,8 @@ public class HouseMongoController {
             for (Document doc : documents) {
                 try {
 
-                    Integer area = getIntegerSafe(doc, "area");
                     String address = doc.getString("address");
-
+                    
                     Double streetInFrontOfHouse = getDoubleSafe(doc, "street_in_front_of_house");
                     Double width = getDoubleSafe(doc, "width");
                     Double height = getDoubleSafe(doc, "height");
@@ -65,17 +63,11 @@ public class HouseMongoController {
                     Integer bedroomNumber = getIntegerSafe(doc, "bedroom_number"); 
                     Integer bathroomNumber = getIntegerSafe(doc, "bathroom_number"); 
                     String direction = doc.getString("direction");
-                    Integer law = getIntegerSafe(doc, "law"); 
-
-                    Double price = getDoubleSafe(doc, "price");
-                    Double room_density = getDoubleSafe(doc, "room_density");
-                    Double bath_per_bed = getDoubleSafe(doc, "bath_per_bed");
-                    Double wide_ratio = getDoubleSafe(doc, "wide_ratio");
                     Double distance_center = getDoubleSafe(doc, "distance_center");
 
-                    House house = new House(area, address, streetInFrontOfHouse, width, height,
-                            floorNumber, bedroomNumber, bathroomNumber, direction, law, price,
-                            room_density, bath_per_bed, wide_ratio, distance_center);
+                    House house = new House(address, streetInFrontOfHouse, width,
+                                            height, floorNumber, bedroomNumber,
+                                            bathroomNumber, direction, distance_center);
 
                     houses.add(house);
 

@@ -3,7 +3,7 @@ package org.yourcompany.yourproject.Entity;
 import ml.dmlc.xgboost4j.java.*;
 import java.util.*;
 
-public interface RealEstate {
+interface RealEstate {
     double predictPrice() throws Exception;
 }
 
@@ -28,7 +28,7 @@ public class House implements RealEstate {
     private Double distance_center;   // quang duong den trung tam thanh pho
     private static final Map<String, Integer> tierAddress = new HashMap<>();
     private static final Map<String, Integer> tierDirection = new HashMap<>();
-    
+
     public House() {
     }
 
@@ -230,36 +230,48 @@ public class House implements RealEstate {
     public static int directiontoint(String direction) {
         return tierDirection.getOrDefault(direction, -1);
     }
-    
+
+    // --- CÁC HÀM HỖ TRỢ UI (Lấy danh sách để hiển thị lên ComboBox) ---
+    public static Set<String> getAddressList() {
+        return tierAddress.keySet();
+    }
+
+    public static Set<String> getDirectionList() {
+        return tierDirection.keySet();
+    }
+
     // Dự đoán giá nhà (Minh)-------------------------------------------------
-     @Override
+    private static Booster booster;
+
+    @Override
     public double predictPrice() throws Exception {
+        if (booster == null) {
+            // path file là path đầy đủ (hỏi ai nó bảo thế ko chăc) - quang
+            booster = XGBoost.loadModel("D:\\java\\group-9\\Group9-OOP\\src\\main\\java\\org\\yourcompany\\yourproject\\Entity\\house_price_json.json");
+        }
 
-        Booster booster = XGBoost.loadModel("house_price_json.json");
-
-        float[][] input = new float[][]{
-            {    
+        float[] input = new float[]{
                 this.area.floatValue(),
-                addresstoint(this.address),                    // address
-                this.streetInFrontOfHouse.floatValue(),// street
-                this.width.floatValue(),               // width
-                this.height.floatValue(),              // height
-                this.floorNumber.floatValue(),         // floor
-                this.bedroomNumber.floatValue(),       // bedroom
-                this.bathroomNumber.floatValue(),      // bathroom
-                directiontoint(this.direction),                  // direction
+                (float) addresstoint(this.address),      // Cast to float
+                this.streetInFrontOfHouse.floatValue(),
+                this.width.floatValue(),
+                this.height.floatValue(),
+                this.floorNumber.floatValue(),
+                this.bedroomNumber.floatValue(),
+                this.bathroomNumber.floatValue(),
+                (float) directiontoint(this.direction),  // Cast to float
                 this.room_density.floatValue(),
                 this.bath_per_bed.floatValue(),
                 this.wide_ratio.floatValue(),
                 this.distance_center.floatValue()
-            }
         };
-        DMatrix dmatrix = new DMatrix(input, 1, input[0].length);
+
+        // FIX: Use input.length
+        DMatrix dmatrix = new DMatrix(input, 1, input.length);
+
         float[][] preds = booster.predict(dmatrix);
 
         this.price = (double) preds[0][0];
         return this.price;
     }
-
-    
 }

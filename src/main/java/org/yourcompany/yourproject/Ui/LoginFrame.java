@@ -1,140 +1,204 @@
 package org.yourcompany.yourproject.Ui;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import org.yourcompany.yourproject.Entity.User;
 import org.yourcompany.yourproject.Config.PasswordUtil;
 import org.yourcompany.yourproject.Config.UserDataService;
-import java.awt.*;
+import org.yourcompany.yourproject.Entity.User;
+import javax.swing.JOptionPane;
 
-public class LoginFrame extends JFrame {
-
-    private JTextField emailField;
-    private JPasswordField passwordField;
+public class LoginFrame extends javax.swing.JFrame {
+    
     private UserDataService userDataService;
-
+    
+    /**
+     * Creates new form NewJFrame
+     */
     public LoginFrame() {
+        initComponents();
+        this.setLocationRelativeTo(null);
         this.userDataService = new UserDataService();
-
-        setTitle("Dự đoán giá nhà - Đăng nhập");
-        setSize(750, 400);
-
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        setLayout(new BorderLayout());
-
-        // --- PHẦN HÌNH ẢNH (WEST) ---
-        JLabel imageLabel = new JLabel();
-        ImageIcon icon = new ImageIcon((getClass().getResource("/img.png")));
-        Image img = icon.getImage().getScaledInstance(350, 400, Image.SCALE_SMOOTH);
-        imageLabel.setIcon(new ImageIcon(img));
-        add(imageLabel, BorderLayout.WEST);
-
-        // --- PHẦN FORM (CENTER) ---
-        JPanel mainFormPanel = new JPanel(new GridBagLayout());
-        mainFormPanel.setBackground(Color.WHITE);
-        mainFormPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
-        add(mainFormPanel, BorderLayout.CENTER);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.weightx = 1.0;
-
-        // **HÀNG 0: TIÊU ĐỀ**
-        JLabel title = new JLabel("Đăng nhập hệ thống");
-        title.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        mainFormPanel.add(title, gbc);
-
-        // **HÀNG 1: HỘP BO GÓC (Chỉ chứa các trường nhập liệu)**
-        RoundedPanel fieldsPanel = new RoundedPanel(new GridBagLayout(), 20, new Color(245, 245, 245));
-        fieldsPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
-
-        GridBagConstraints gbcFields = new GridBagConstraints();
-        gbcFields.fill = GridBagConstraints.HORIZONTAL;
-        gbcFields.insets = new Insets(5, 5, 5, 5);
-
-        Font labelFont = new Font("Segoe UI", Font.PLAIN, 14);
-        Font fieldFont = new Font("Segoe UI", Font.PLAIN, 14);
-
-        // Hàng 1.1: Email
-        gbcFields.gridx = 0;
-        gbcFields.gridy = 0;
-        gbcFields.weightx = 0.1;
-        JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setOpaque(false);
-        emailLabel.setFont(labelFont);
-        fieldsPanel.add(emailLabel, gbcFields);
-
-        gbcFields.gridx = 1;
-        gbcFields.gridy = 0;
-        gbcFields.weightx = 0.9;
-        emailField = new JTextField(15);
-        emailField.setFont(fieldFont);
-        fieldsPanel.add(emailField, gbcFields);
-
-        // Hàng 1.2: Mật khẩu
-        gbcFields.gridx = 0;
-        gbcFields.gridy = 1;
-        JLabel passLabel = new JLabel("Mật khẩu:");
-        passLabel.setOpaque(false);
-        passLabel.setFont(labelFont);
-        fieldsPanel.add(passLabel, gbcFields);
-
-        gbcFields.gridx = 1;
-        gbcFields.gridy = 1;
-        passwordField = new JPasswordField(15);
-        passwordField.setFont(fieldFont);
-        fieldsPanel.add(passwordField, gbcFields);
-
-        // Thêm hộp bo góc vào panel chính
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 2;
-        mainFormPanel.add(fieldsPanel, gbc);
-
-        // **HÀNG 2: CÁC NÚT BẤM**
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-
-        JButton loginBtn = new RoundedButton("Đăng nhập");
-        JButton registerBtn = new RoundedButton("Đăng ký");
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        btnPanel.setOpaque(false);
-        btnPanel.add(loginBtn);
-        btnPanel.add(registerBtn);
-        mainFormPanel.add(btnPanel, gbc);
-
-        // --- HÀNH ĐỘNG CỦA NÚT ---
-        loginBtn.addActionListener(e -> login());
-        registerBtn.addActionListener(e -> {
-            new RegisterFrame().setVisible(true);
-            dispose();
-        });
     }
 
-    private void login() {
-        String email = emailField.getText().trim();
-        String password = new String(passwordField.getPassword());
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        imagePanel1 = new org.yourcompany.yourproject.Ui.ImagePanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
+        imagePanel2 = new org.yourcompany.yourproject.Ui.ImagePanel();
+
+        javax.swing.GroupLayout imagePanel1Layout = new javax.swing.GroupLayout(imagePanel1);
+        imagePanel1.setLayout(imagePanel1Layout);
+        imagePanel1Layout.setHorizontalGroup(
+            imagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 404, Short.MAX_VALUE)
+        );
+        imagePanel1Layout.setVerticalGroup(
+            imagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel1.setText("Đăng nhập hệ thống");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Email :");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Mật khẩu :");
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLogin.setText("Đăng nhập");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnRegister.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegister.setText("Đăng ký");
+        btnRegister.setPreferredSize(new java.awt.Dimension(98, 27));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogin)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(txtPassword)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout imagePanel2Layout = new javax.swing.GroupLayout(imagePanel2);
+        imagePanel2.setLayout(imagePanel2Layout);
+        imagePanel2Layout.setHorizontalGroup(
+            imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 418, Short.MAX_VALUE)
+        );
+        imagePanel2Layout.setVerticalGroup(
+            imagePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(imagePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(imagePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String email = txtEmail.getText().trim();
+        String password = new String(txtPassword.getPassword());
 
         User user = userDataService.findUserByEmail(email);
 
         if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + user.getName());
             new MarketFrame(user).setVisible(true);
-            dispose();
-            return;
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sai email hoặc mật khẩu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
-        JOptionPane.showMessageDialog(this, "Sai email hoặc mật khẩu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        new RegisterFrame().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
+    private org.yourcompany.yourproject.Ui.ImagePanel imagePanel1;
+    private org.yourcompany.yourproject.Ui.ImagePanel imagePanel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassword;
+    // End of variables declaration//GEN-END:variables
 }
