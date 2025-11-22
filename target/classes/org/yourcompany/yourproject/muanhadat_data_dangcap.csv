@@ -1,0 +1,408 @@
+﻿area,address,street_in_front_of_house,width,height,floor_number,bedroom_number,bathroom_number,direction,law,price
+51,Phường Vĩnh Tuy,3,10.2,5,4,3,3,Không xác định,1,9.2
+34,Phường Tương Mai,3,8.5,4,6,3,4,Không xác định,1,7.5
+34,Phường Lĩnh Nam,3,6.8,5,5,3,4,Không xác định,1,8.85
+43,Phường Tương Mai,3,14.3,3,5,6,4,Không xác định,1,10.5
+51,Phường Vĩnh Tuy,4,7.3,7,6,4,5,Không xác định,1,19.8
+52,Phường Vĩnh Tuy,3,13,4,4,4,3,Không xác định,1,10.2
+39,Phường Tương Mai,3,13,3,5,3,4,Không xác định,1,10.6
+30,Phường Tương Mai,3,7.5,4,7,3,5,Không xác định,1,9.8
+55,Phường Tương Mai,3,18.3,3,5,6,4,Không xác định,1,11.8
+90,Phường Tương Mai,4,15,6,3,2,3,Không xác định,0,10.2
+39,Phường Tương Mai,3,7.8,5,4,3,3,Không xác định,1,8.15
+26,Phường Vĩnh Tuy,3,5,5,3,3,3,Không xác định,1,7.1
+30,Phường Tương Mai,3,6,5,5,3,4,Không xác định,1,6.85
+73,Phường Tương Mai,5,14.6,5,4,3,3,Không xác định,1,20
+56,Phường Lĩnh Nam,3,11.2,5,5,3,4,Không xác định,1,9.85
+82,Phường Tương Mai,3,20.5,4,3,3,3,Không xác định,1,9.4
+30,Phường Lĩnh Nam,3,10,3,5,3,4,Không xác định,1,6.35
+55,Phường Tương Mai,3,13.8,4,4,4,3,Không xác định,1,13.35
+63,Phường Tương Mai,4,12.6,5,5,4,4,Không xác định,1,13.8
+27,Phường Vĩnh Tuy,4,9,3,4,4,3,Không xác định,1,8.85
+39,Phường Tương Mai,4,9.8,4,5,4,3,Không xác định,1,9
+49,Phường Vĩnh Tuy,4,12.2,4,3,4,3,Không xác định,1,11.3
+40,Phường Tương Mai,3,10,4,5,6,4,Không xác định,1,8.35
+43,Phường Tương Mai,3,10.8,4,5,4,4,Không xác định,1,8.9
+55,Phường Lĩnh Nam,3,13.8,4,6,6,4,Không xác định,1,14.5
+50,Phường Vĩnh Tuy,4,16.7,3,4,4,3,Không xác định,1,10.9
+39,Phường Tương Mai,3,9.8,4,5,3,4,Không xác định,1,6.35
+30,Phường Tương Mai,3,6,5,5,3,4,Không xác định,1,6.2
+30,Phường Bạch Mai,3,7.5,4,4,3,2,Không xác định,1,8.3
+34,Phường Bạch Mai,3,11.3,3,3,2,2,Không xác định,1,6.8
+31,Phường Tương Mai,3,7.8,4,4,3,3,Không xác định,1,6.95
+34,Phường Tương Mai,3,8.5,4,6,3,4,Không xác định,1,7.85
+35,Phường Tương Mai,3,8.8,4,6,3,4,Không xác định,1,7.85
+40,Phường Vĩnh Tuy,3,13.3,3,4,4,4,Không xác định,1,7.98
+45,Phường Tương Mai,3,7.5,6,4,4,3,Không xác định,1,9
+50,Phường Vĩnh Tuy,3,12.5,4,5,6,4,Không xác định,1,12.5
+30,Phường Vĩnh Tuy,3,0.8,38,6,3,4,Không xác định,1,6.75
+66,Phường Lĩnh Nam,3,16.5,4,5,5,4,Không xác định,1,13.8
+30,Phường Tương Mai,3,10,3,5,3,4,Không xác định,1,6.5
+32,Phường Tương Mai,3,10.7,3,5,3,4,Không xác định,1,6.4
+34,Phường Tương Mai,3,8.5,4,4,4,3,Không xác định,1,7.35
+47,Phường Bạch Mai,3,7.8,6,5,3,4,Không xác định,1,8.55
+30,Phường Bạch Mai,4,5,6,5,4,4,Không xác định,1,11
+42,Phường Vĩnh Tuy,3,10.5,4,3,3,2,Không xác định,1,9.95
+51,Phường Vĩnh Tuy,3,10.2,5,4,3,3,Không xác định,1,11
+41,Phường Vĩnh Tuy,3,10.2,4,4,4,3,Không xác định,1,8.5
+29,Phường Tương Mai,3,5.8,5,5,3,4,Không xác định,1,7.2
+54,Phường Tương Mai,3,9,6,3,4,2,Không xác định,1,9.9
+51,Phường Hoàng Mai,3,12.8,4,4,4,3,Không xác định,1,14.2
+35,Phường Tương Mai,3,8.8,4,5,3,4,Không xác định,1,6.98
+44,Phường Hoàng Mai,3,11,4,3,3,2,Không xác định,1,7.28
+41,Phường Tương Mai,3,4.6,9,4,4,3,Không xác định,1,7.4
+42,Phường Vĩnh Tuy,3,10.5,4,5,3,4,Không xác định,1,8.6
+35,Phường Tương Mai,5,5.8,6,1,1,1,Không xác định,1,9.1
+41,Phường Vĩnh Tuy,3,8.2,5,3,3,3,Không xác định,1,7.6
+51,Phường Vĩnh Tuy,4,12.8,4,6,4,5,Không xác định,1,18.7
+31,Phường Tương Mai,3,7.8,4,7,3,5,Không xác định,1,8.45
+36,Phường Tương Mai,3,9,4,5,3,4,Không xác định,1,10
+36,Phường Tương Mai,4,9,4,3,2,2,Không xác định,1,9.5
+44,Phường Hoàng Mai,2,11,4,1,1,1,Không xác định,1,7.6
+50,Phường Tương Mai,3,10,5,3,3,3,Không xác định,1,8
+82,Phường Bạch Mai,3,16.4,5,2,2,2,Không xác định,1,8.5
+47,Phường Tương Mai,0,11.8,4,4,4,4,Không xác định,1,8.6
+42,Phường Bạch Mai,0,10.5,4,4,4,4,Không xác định,1,8.5
+40,Phường Tương Mai,0,13.3,3,3,3,3,Không xác định,1,9.5
+48,Phường Tương Mai,3,9.6,5,5,5,5,Không xác định,1,15.9
+52,Phường Tương Mai,0,13,4,6,5,4,Không xác định,1,14.75
+30,Phường Vĩnh Tuy,0,7.5,4,4,4,4,Không xác định,1,6.35
+44,Phường Tương Mai,0,11,4,4,4,4,Không xác định,1,9.5
+40,Phường Vĩnh Tuy,0,4.4,9,4,4,4,Không xác định,1,8.15
+31,Phường Tương Mai,0,7.8,4,4,4,4,Không xác định,1,6.35
+31,Phường Tương Mai,3,6.2,5,5,3,4,Không xác định,1,7.5
+30,Phường Tương Mai,3,6,5,5,3,4,Không xác định,1,6.85
+34,Phường Tương Mai,3,6.8,5,5,3,4,Không xác định,1,8.5
+35,Phường Hoàng Mai,3,8.8,4,6,4,4,Không xác định,1,9.68
+41,Phường Tương Mai,0,10.2,4,4,4,4,Không xác định,1,8.15
+41,Phường Vĩnh Tuy,3,13.7,3,4,5,4,Không xác định,1,7.98
+33,Phường Tương Mai,0,8.2,4,5,3,4,Không xác định,1,8.5
+39,Phường Tương Mai,3,9.8,4,4,3,3,Không xác định,1,7.95
+30,Phường Tương Mai,3,7.5,4,5,3,4,Không xác định,1,7
+47,Phường Tương Mai,3,11.8,4,5,4,4,Không xác định,1,9.3
+31,Phường Tương Mai,3,6.2,5,5,3,4,Không xác định,1,6.65
+36,Phường Vĩnh Tuy,3,7.2,5,6,4,4,Không xác định,1,7.68
+36,Phường Tương Mai,3,12,3,4,3,3,Không xác định,1,7.6
+33,Phường Hoàng Mai,4,8.2,4,5,4,4,Không xác định,1,8.85
+47,Phường Vĩnh Tuy,3,7.8,6,5,5,4,Không xác định,1,8.35
+46,Phường Tương Mai,3,15.3,3,4,4,3,Không xác định,1,12.85
+33,Phường Vĩnh Tuy,3,11,3,4,3,3,Không xác định,1,9.85
+43,Phường Tương Mai,3,14.3,3,3,4,3,Không xác định,1,7.3
+30,Phường Vĩnh Tuy,4,3.8,8,5,3,4,Không xác định,1,7.68
+30,Phường Bạch Mai,3,7.5,4,5,3,4,Không xác định,1,7.5
+36,Phường Tương Mai,3,12,3,5,3,4,Không xác định,1,7.65
+46,Phường Vĩnh Tuy,3,11.5,4,6,6,5,Không xác định,1,14.8
+35,Phường Lĩnh Nam,3,5.8,6,5,4,4,Không xác định,1,7.98
+44,Phường Tương Mai,3,11,4,4,3,3,Không xác định,1,10.5
+45,Phường Hoàng Mai,3,11.2,4,3,3,2,Không xác định,1,11.8
+25,Phường Hoàng Mai,3,8.3,3,4,3,3,Không xác định,1,5.55
+47,Phường Hoàng Mai,4,11.8,4,4,3,3,Không xác định,1,14.5
+46,Phường Tương Mai,4,15.3,3,4,3,3,Không xác định,1,13.5
+30,Phường Hoàng Mai,5,7.5,4,5,3,4,Không xác định,1,8.35
+35,Phường Tương Mai,3,7,5,5,3,4,Không xác định,1,7.95
+48,Phường Hoàng Mai,3,16,3,5,6,4,Không xác định,1,12.8
+35,Phường Vĩnh Tuy,3,7,5,4,4,3,Không xác định,1,7.3
+45,Phường Tương Mai,3,11.2,4,4,3,3,Không xác định,1,7.7
+34,Phường Vĩnh Tuy,3,8.5,4,4,3,3,Không xác định,1,6.1
+30,Phường Tương Mai,3,10,3,4,4,3,Không xác định,1,5.95
+34,Phường Hoàng Mai,3,11.3,3,5,3,4,Không xác định,1,7.7
+54,Phường Tương Mai,3,9,6,5,6,4,Không xác định,1,8.5
+50,Phường Tương Mai,3,16.7,3,5,5,4,Không xác định,1,10.5
+37,Phường Vĩnh Tuy,3,9.2,4,5,3,4,Không xác định,1,7.5
+41,Phường Hai Bà Trưng,3,10.2,4,4,4,3,Không xác định,1,8.4
+43,Phường Vĩnh Tuy,3,10.8,4,4,4,3,Không xác định,1,9.85
+50,Phường Hai Bà Trưng,3,12.5,4,1,1,1,Không xác định,1,7.8
+32,Phường Hoàng Mai,3,8,4,4,3,3,Không xác định,1,7.7
+36,Phường Tương Mai,3,9,4,5,3,4,Không xác định,1,10.5
+68,Phường Hoàng Mai,4,11.3,6,4,4,3,Không xác định,1,14.8
+43,Phường Hai Bà Trưng,4,10.8,4,5,4,3,Không xác định,1,15
+35,Phường Tương Mai,3,7,5,5,3,4,Không xác định,1,7.5
+52,Phường Bạch Mai,3,10.4,5,5,6,4,Không xác định,1,11.9
+52,Phường Hoàng Mai,4,13,4,4,4,3,Không xác định,1,14.3
+41,Phường Vĩnh Tuy,3,8.2,5,4,4,3,Không xác định,1,7.95
+32,Phường Vĩnh Tuy,3,8,4,5,3,3,Không xác định,1,8.2
+53,Phường Tương Mai,3,13.2,4,4,4,3,Không xác định,1,9.9
+34,Phường Tương Mai,3,8.5,4,4,3,3,Không xác định,1,7.1
+43,Phường Tương Mai,3,10.8,4,5,3,4,Không xác định,1,10.5
+46,Phường Vĩnh Tuy,3,9.2,5,5,6,4,Không xác định,1,15.5
+44,Phường Tương Mai,3,11,4,5,4,4,Không xác định,1,10.5
+45,Phường Tương Mai,3,9,5,6,6,5,Không xác định,1,11.95
+48,Phường Tương Mai,4,9.6,5,4,3,3,Không xác định,1,14
+43,Phường Tương Mai,3,10.8,4,5,6,4,Không xác định,1,13.2
+42,Phường Tương Mai,3,10.5,4,5,4,4,Không xác định,1,12.8
+80,Phường Bạch Mai,8,20,4,4,4,3,Không xác định,1,21.5
+90,Phường Lĩnh Nam,6,22.5,4,3,4,3,Không xác định,1,23.5
+51,Phường Bạch Mai,8,12.8,4,5,4,4,Không xác định,1,16.5
+43,Phường Lĩnh Nam,3,10.8,4,4,3,3,Không xác định,1,9.5
+54,Phường Tương Mai,3,13.5,4,4,4,3,Không xác định,1,10.8
+41,Phường Tương Mai,3,8.2,5,5,4,3,Không xác định,1,10.5
+60,Phường Hoàng Mai,6,12,5,5,4,3,Không xác định,1,14.8
+74,Phường Tương Mai,3,10.6,7,4,4,3,Không xác định,1,13.4
+61,Phường Lĩnh Nam,6,12.2,5,5,4,4,Không xác định,1,14.8
+41,Phường Tương Mai,3,8.2,5,5,6,4,Không xác định,1,10.2
+38,Phường Bạch Mai,3,9.5,4,5,3,4,Không xác định,1,9.5
+34,Phường Bạch Mai,3,11.3,3,4,4,3,Không xác định,1,10.5
+47,Phường Vĩnh Tuy,6,9.4,5,5,3,4,Không xác định,1,13.8
+38,Phường Vĩnh Tuy,3,9.5,4,5,3,4,Không xác định,1,7.65
+30,Phường Tương Mai,3,6,5,5,3,4,Không xác định,1,6.2
+45,Phường Vĩnh Tuy,3,15,3,5,6,4,Không xác định,1,12.87
+43,Phường Vĩnh Tuy,3,8.6,5,4,4,3,Không xác định,1,10.9
+45,Phường Tương Mai,4,11.2,4,6,4,5,Không xác định,1,15.5
+32,Phường Tương Mai,6,10.7,3,5,3,4,Không xác định,1,11
+35,Phường Bạch Mai,3,8.8,4,5,3,4,Không xác định,1,8.8
+54,Phường Tương Mai,5,13.5,4,7,4,6,Không xác định,1,23.9
+51,Phường Tương Mai,6,12.8,4,6,3,5,Không xác định,1,21
+40,Phường Yên Sở,8,13.3,3,5,3,4,Không xác định,1,18.8
+70,Phường Hoàng Mai,8,14,5,4,3,3,Không xác định,1,20
+40,Phường Tương Mai,3,10,4,5,6,4,Không xác định,1,10.8
+30,Phường Tương Mai,3,7.5,4,5,3,4,Không xác định,1,7.5
+34,Phường Bạch Mai,3,6.8,5,4,2,3,Không xác định,1,6.9
+48,Phường Tương Mai,4,9.6,5,4,3,3,Không xác định,1,14
+32,Phường Bạch Mai,3,10.7,3,4,3,3,Không xác định,1,8.1
+42,Phường Tương Mai,3,10.5,4,4,4,3,Không xác định,1,9.5
+46,Phường Tương Mai,3,9.2,5,4,4,3,Không xác định,1,8.6
+41,Phường Vĩnh Tuy,4,13.7,3,4,4,3,Không xác định,1,10.6
+42,Phường Lĩnh Nam,4,14,3,4,6,3,Không xác định,1,10.6
+46,Phường Bạch Mai,6,11.5,4,4,4,3,Không xác định,1,18.8
+38,Phường Tương Mai,3,5.4,7,3,3,3,Không xác định,1,8.2
+57,Phường Bạch Mai,4,14.2,4,4,3,3,Không xác định,1,11.68
+42,Phường Tương Mai,35,10.5,4,5,4,4,Không xác định,1,14
+73,Phường Bạch Mai,3,14.6,5,3,3,2,Không xác định,1,12.4
+62,Phường Bạch Mai,3,12.4,5,5,6,4,Không xác định,1,15.8
+58,Phường Tương Mai,4,11.6,5,3,4,2,Không xác định,1,11
+73,Phường Tương Mai,3,14.6,5,3,3,2,Không xác định,1,11.3
+33,Phường Vĩnh Tuy,3,8.2,4,5,3,4,Không xác định,1,8.6
+62,Phường Lĩnh Nam,4,12.4,5,5,5,4,Không xác định,1,13.8
+61,Phường Tương Mai,4,12.2,5,5,4,4,Không xác định,1,13.8
+73,Phường Tương Mai,3,18.2,4,3,3,2,Không xác định,1,12.5
+69,Phường Lĩnh Nam,4,13.8,5,1,2,1,Không xác định,1,17
+88,Phường Tương Mai,3,22,4,4,4,3,Không xác định,1,14.2
+79,Phường Lĩnh Nam,3,19.8,4,4,4,3,Không xác định,1,16.8
+78,Phường Vĩnh Tuy,4,19.5,4,4,3,3,Không xác định,1,16.2
+55,Phường Lĩnh Nam,8,9.2,6,3,2,2,Không xác định,1,22
+55,Phường Tương Mai,5,13.8,4,7,4,5,Không xác định,1,19.5
+33,Phường Vĩnh Tuy,3,8.2,4,5,3,4,Không xác định,1,7.95
+36,Phường Tương Mai,3,12,3,5,3,4,Không xác định,1,8.5
+37,Phường Tương Mai,8,1.1,33,4,2,3,Không xác định,1,15
+69,Phường Bạch Mai,8,8.6,8,2,2,1,Không xác định,1,15
+62,Phường Bạch Mai,3,6.9,9,4,4,3,Không xác định,1,11.5
+34,Phường Lĩnh Nam,3,6.8,5,5,3,4,Không xác định,1,7.98
+58,Phường Bạch Mai,5,11.6,5,4,4,3,Không xác định,0,19
+61,Phường Tương Mai,8,12.2,5,5,6,4,Không xác định,1,22.5
+73,Phường Vĩnh Tuy,3,12.2,6,3,3,2,Không xác định,1,14.5
+46,Phường Vĩnh Tuy,6,11.5,4,4,4,3,Không xác định,1,16.38
+52,Phường Tương Mai,5,1.2,45,6,4,5,Không xác định,1,18.6
+46,Phường Vĩnh Tuy,8,11.5,4,6,4,5,Không xác định,1,19.5
+77,Phường Tương Mai,4,19.2,4,1,2,1,Không xác định,1,18.8
+55,Phường Tương Mai,3,13.8,4,4,4,3,Không xác định,1,11.5
+64,Phường Lĩnh Nam,3,16,4,7,12,12,Không xác định,1,18.9
+50,Phường Tương Mai,3,10,5,7,9,9,Không xác định,1,13.5
+75,Phường Vĩnh Tuy,6,15,5,4,6,3,Không xác định,1,21.3
+51,Phường Bạch Mai,4,17,3,5,6,4,Không xác định,1,13.2
+35,Phường Kiến Hưng,2,11.6,3,4,4,4,Không xác định,1,6.35
+35,Phường Kiến Hưng,3,8.5,4,4,4,4,Không xác định,1,4.85
+35,Phường Kiến Hưng,4,8.5,4,5,4,3,Không xác định,1,8
+34.6,Xã Bình Minh,2,11.6,3,4,4,4,Không xác định,1,4.75
+25,Phường Hoàng Mai,6,6.25,4,5,3,4,Không xác định,1,8.5
+46,Phường Cầu Diễn,4.5,7,8.4,4,3,4,Không xác định,1,11.3
+175,Phường Việt Hưng,8,9,19,3,4,2,Tây - Bắc,1,46
+110,Phường Việt Hưng,15,6,18,6,4,4,Tây - Bắc,1,33
+40,Phường Tương Mai,4,8,5,5,4,4,Không xác định,1,9.9
+32,Phường Nghĩa Đô,4,8,4,5,5,4,Bắc,1,9.86
+40,Phường Hai Bà Trưng,4,8,5,5,4,4,Đông,1,7.45
+34,Phường Từ Liêm,3,8,4.2,5,3,3,Không xác định,1,5.6
+50,Phường Yên Sở,5,12,4,5,6,4,Nam,1,10.2
+44,Phường Hoàng Liệt,5,11,4,5,4,4,Đông,1,9
+70,Phường Vĩnh Hưng,4,14,5,5,5,4,Nam,1,7.5
+40,Phường Hoàng Liệt,4,10,4,6,4,4,Đông,1,8.9
+48,Phường Yên Sở,4,2,4,4,4,3,Đông,1,9.5
+48,Phường Hoàng Liệt,3,12,4,6,4,4,Đông,1,9.2
+88,Phường Yên Sở,8,11,8,9,2,2,Đông - Bắc,1,5.15
+56,Phường Vĩnh Hưng,4,14,4,5,4,4,Nam,1,9.6
+90,Phường Hoàng Liệt,4,18,5,7,23,23,Đông,1,19.8
+48,Phường Hoàng Liệt,5,7,7,4,3,3,Đông,1,6.2
+30,Phường Hoàng Liệt,4,8,4,5,3,3,Đông,1,4.5
+44,Phường Hoàng Liệt,3,12,4,4,4,3,Bắc,1,7.5
+33,Phường Yên Sở,3,9,4,5,3,4,Đông,1,5.85
+41,Phường Hoàng Liệt,3,11,4,4,3,3,Đông - Nam,1,5.5
+33,Phường Hoàng Liệt,3,11,35,5,3,3,Nam,1,6.99
+75,Phường Hoàng Liệt,4,8,9,9,3,2,Tây,1,4.35
+40,Phường Hoàng Liệt,3,8,5,5,5,4,Nam,1,7
+81,Phường Hoàng Liệt,8,9,9,5,3,2,Đông,1,3.75
+45,Phường Yên Sở,4,4,1,4,4,3,Đông,1,8.1
+35,Phường Hoàng Liệt,3,9,1,5,5,3,Tây - Nam,1,6.35
+75,Phường Hoàng Liệt,6,8.3,9,5,3,2,Tây - Nam,1,3.75
+30,Phường Vĩnh Hưng,4,9,35,4,3,2,Tây,1,5.65
+55,Phường Định Công,3,15,35,5,3,3,Bắc,1,8.3
+65,Phường Hoàng Liệt,8,8,9,7,2,1,Đông,1,3.3
+40,Phường Hoàng Liệt,3,10,4,5,6,4,Nam,1,5.4
+27,Phường Vĩnh Hưng,0,7,4,5,3,3,Nam,1,4.3
+46,Phường Hoàng Liệt,4,13,4,5,6,6,Đông,1,0
+46,Phường Hoàng Liệt,4,13,4,4,5,3,Tây - Nam,1,7.95
+53,Phường Hoàng Liệt,4,15,4,4,4,3,Đông,1,6.95
+50,Phường Thanh Xuân,3,15,4,5,6,4,Nam,1,8.1
+66,Phường Hoàng Liệt,4,13,4,4,4,3,Đông - Nam,1,10.2
+40,Phường Định Công,3,14,4,5,6,4,Tây - Nam,1,6.95
+35,Phường Hoàng Liệt,3,10,35,5,3,3,Đông - Bắc,1,5.65
+38,Phường Hoàng Liệt,3,13,4,4,3,3,Đông - Bắc,1,7.6
+49,Phường Hoàng Liệt,3,14,4,7,4,5,Đông,1,9.9
+65,Phường Hoàng Liệt,3,13,5,5,5,4,Đông - Nam,1,5.75
+45,Phường Hoàng Liệt,3,13,4,5,4,3,Đông - Bắc,1,9.8
+40,Phường Vĩnh Hưng,4,14,4,4,4,3,Đông,1,5.6
+40,Phường Hoàng Liệt,3,14,4,6,6,6,Nam,1,7.79
+40,Phường Vĩnh Hưng,5,8,5,5,4,4,Tây - Bắc,1,6.7
+48,Phường Hoàng Liệt,0,12,4,5,4,4,Tây - Nam,1,7.95
+40,Phường Hoàng Liệt,5,15,4,5,4,4,Tây,1,9.3
+46,Phường Định Công,4,14,4,6,6,4,Đông,1,6.35
+35,Phường Hoàng Liệt,4,14,4,5,4,3,Nam,1,6.7
+42,Phường Khương Mai,5,13,4,5,5,3,Tây - Nam,1,10.9
+41,Phường Hoàng Liệt,4,10,4,5,4,3,Đông,1,7.98
+32,Phường Định Công,3,8,4,5,3,3,Đông,1,5.6
+40,Phường Vĩnh Hưng,3,10,4,4,4,3,Đông,1,6.9
+38,Phường Thanh Xuân Nam,3,11,4,4,4,3,Đông - Nam,1,5.6
+36,Phường Hoàng Liệt,3,9,5,5,3,4,Đông,1,6.1
+46,Phường Thanh Xuân Nam,3,11,4,5,3,4,Đông,1,9.3
+40,Phường Hoàng Liệt,4,12,4,4,3,3,Đông,1,6.5
+55,Phường Thanh Xuân,3,7,8,5,11,5,Tây - Bắc,1,8.8
+46,Phường Thanh Xuân Nam,3,12,4,4,5,4,Nam,1,7.85
+40,Phường Hoàng Liệt,1,10,4,1,1,1,Đông,1,6.45
+36,Phường Hoàng Liệt,4,1,4,5,6,4,Đông,1,8.3
+40,Phường Vĩnh Hưng,4,10,4,5,3,3,Tây - Bắc,1,10.8
+38,Phường Hoàng Liệt,4,12,4,4,4,3,Đông,1,7.35
+56,Phường Định Công,4,16,4,5,4,4,Đông,1,9.7
+56,Phường Thượng Đình,4,9,6,4,3,2,Đông,1,11.2
+45,Phường Định Công,4,11,4,4,4,3,Đông,1,7.95
+35,Phường Hoàng Liệt,4,9,4,4,4,3,Đông,1,5.6
+54,Phường Khương Mai,4,10,5,4,3,3,Đông,1,7.5
+50,Phường Hoàng Liệt,3,14,4,5,7,4,Đông,1,7.9
+48,Phường Thanh Xuân Bắc,4,14,4,5,3,3,Đông - Nam,1,7.5
+45,Phường Hoàng Liệt,6,10,5,6,4,4,Nam,1,8.85
+48,Phường Hoàng Liệt,5,12,4,5,4,3,Bắc,1,7.9
+50,Phường Hoàng Liệt,4,14,4,5,4,4,Đông,1,7.85
+50,Phường Vĩnh Hưng,6,12,4,5,4,3,Đông - Nam,1,8.8
+40,Phường Thượng Đình,4,9,5,5,4,3,Tây,1,6.85
+40,Phường Hoàng Liệt,3,11,4,5,4,3,Tây,1,6.5
+59,Phường Hoàng Liệt,4,12,5,5,4,4,Đông,1,7.9
+44,Phường Định Công,4,9,6,5,5,4,Đông,1,6.1
+39,Phường Vĩnh Hưng,4,10,4,6,5,4,Đông,1,0
+38,Phường Hoàng Liệt,4,9,4,5,4,4,Tây,1,6.99
+45,Phường Thanh Xuân Trung,4,11,4,6,5,5,Đông - Nam,1,9.9
+47,Phường Hoàng Liệt,3,11,4,6,5,4,Tây - Nam,0,7.55
+44,Phường Hoàng Liệt,10,11,4,3,4,3,Đông,1,5.8
+45,Phường Thanh Xuân Trung,5,11,4,5,3,3,Đông,1,7.6
+36,Phường Hoàng Liệt,3,9,4,4,4,3,Đông,1,5.8
+39,Phường Định Công,5,10,4,5,4,4,Đông,1,6.6
+42,Phường Thượng Đình,6,12,4,5,4,4,Tây,1,10.9
+44,Phường Hoàng Liệt,4,11,4,4,4,4,Tây - Nam,1,7.9
+44,Phường Định Công,5,7,6.3,5,4,4,Đông - Nam,1,10.2
+55,Phường Định Công,4,15,4,4,4,3,Đông - Nam,1,8.4
+45,Phường Hoàng Liệt,5,11,4,5,9,5,Tây - Bắc,1,8.6
+56,Phường Hoàng Liệt,4,14,4,5,9,9,Bắc,1,12.5
+50,Phường Hoàng Liệt,0,13,4,9,9,9,Bắc,1,16
+48,Phường Thanh Xuân Trung,4,12,4,4,4,3,Đông,1,7.8
+65,Phường Vĩnh Hưng,4,16,4,5,4,4,Tây,1,12
+35,Phường Hoàng Mai,3,7,5,5,3,3,Đông,1,6.9
+40,Phường Hoàng Liệt,3,10,4,5,3,3,Đông,1,8.9
+30,Phường Hoàng Mai,3,9,4,4,3,3,Bắc,1,4.7
+30,Phường Hoàng Liệt,4,8,4,4,3,3,Đông - Bắc,1,5.9
+40,Phường Vĩnh Hưng,4,10,4,4,3,3,Nam,1,7.7
+38,Phường Hoàng Liệt,4,9,4,4,5,3,Bắc,1,6.98
+44,Phường Hoàng Mai,4,11,4,5,3,3,Đông,1,6.7
+40,Phường Hoàng Liệt,4,10,4,5,6,4,Đông,1,6.4
+40,Phường Thanh Xuân Bắc,3,10,4,5,3,3,Tây - Bắc,1,5.1
+44,Phường Hoàng Liệt,4,11,4,4,4,4,Tây - Nam,1,7.55
+39,Phường Hoàng Liệt,1,6,7,4,4,4,Tây - Nam,1,7.8
+40,Phường Vĩnh Hưng,5,10,4,5,4,4,Tây - Nam,1,5.3
+52,Phường Thanh Xuân Bắc,4,13,4,5,6,4,Đông - Nam,1,13.8
+48,Phường Thanh Xuân Bắc,3,12,4,5,3,4,Đông,1,9.2
+70,Phường Hoàng Liệt,4,17,4,7,5,5,Tây - Bắc,1,12.9
+52,Phường Hoàng Liệt,5,13,4,6,10,10,Nam,1,12.9
+65,Phường Vĩnh Hưng,9,9,8,12,2,1,Đông,1,3.55
+35,Phường Khương Mai,3,7,5,3,2,2,Đông,1,4.1
+34,Xã Hoài Đức,3,8.5,4,5,7,7,Không xác định,1,6.55
+34,Phường Từ Liêm,4,8.5,4,5,3,3,Không xác định,1,8.8
+35,Phường Từ Liêm,4,7,5,5,3,3,Không xác định,1,6.85
+45,Phường Từ Liêm,3,9,5,5,6,6,Không xác định,1,8.25
+50,Phường Từ Liêm,4.2,10,5,1,1,1,Nam,1,5
+34,Phường Từ Liêm,3,8.5,4,5,4,4,Không xác định,1,6.2
+35,Phường Từ Liêm,3,11,3.3,5,3,3,Không xác định,1,6.5
+52,Phường Từ Liêm,4,7.4,7,5,3,3,Không xác định,1,8
+38,Phường Từ Liêm,3,9,4,4,4,4,Không xác định,1,7
+35,Phường Từ Liêm,4,8.5,4,4,3,2,Không xác định,1,6.35
+48,Phường Xuân Phương,3,12,4,2,2,2,Nam,1,6
+60,Phường Long Biên,3,10,6,4,4,3,Không xác định,1,13.5
+30,Phường Phúc Lợi,5,8,4,5,3,3,Bắc,1,5.1
+32,Phường Phúc Lợi,5,4,8,5,3,2,Tây - Bắc,1,5.3
+60,Phường Long Biên,5,15,4,4,4,3,Không xác định,1,13.5
+30,Phường Phúc Lợi,3,8,4,5,3,3,Bắc,1,5.1
+32,Phường Phúc Lợi,3,4,7,5,3,3,Tây - Bắc,1,5.3
+35,Phường Kim Liên,3,7,5,5,5,5,Không xác định,1,8
+85,Phường Phú Diễn,3,11,9,3,4,2,Tây - Bắc,1,15
+42,Phường Định Công,35,10,4,5,4,4,Không xác định,1,14
+47,Phường Vĩnh Tuy,3,5,9,5,6,4,Không xác định,1,15.5
+31,Phường Tương Mai,3,8,4,6,4,4,Không xác định,1,7.68
+30.4,Phường Xuân Canh,3,7,4,5,3,4,Tây,1,6.4
+46,Phường Phú Diễn,6,11.3,4.5,4,3,3,Không xác định,1,11.3
+38,Phường Phú Diễn,4,6.2,6,6,10,6,Nam,1,11.1
+33,Phường Ba Đình,4,11,3,5,3,3,Không xác định,1,10.5
+82,Phường Phú Diễn,4,16,5,4,4,3,Không xác định,1,12.3
+50,Phường Cầu Giấy,4,10,5,7,5,5,Không xác định,1,18.9
+64,Phường Nghĩa Đô,4,8,6,4,8,8,Không xác định,1,14.87
+90,Phường Nghĩa Đô,7,13,8,6,13,13,Đông - Nam,0,23
+61,Phường Long Biên,10,6,10,4,3,3,Không xác định,1,15
+34,Phường Khương Đình,6,9,4,1,1,1,Đông - Bắc,1,1.8
+28,Xã Hoài Đức,4,7,4,5,3,3,Không xác định,1,4.8
+51,Phường Từ Liêm,5,10,5,3,3,2,Không xác định,1,5.6
+35,Phường Từ Liêm,6,7,5,5,3,3,Không xác định,1,6.75
+42,Phường Từ Liêm,4,7,6,5,4,4,Không xác định,1,9.5
+34,Xã Hoài Đức,4,8,4,5,3,3,Không xác định,1,5.35
+35,Phường Từ Liêm,3,7,5,5,3,3,Không xác định,1,6.5
+52,Phường Từ Liêm,4,10,5,5,3,3,Không xác định,1,6.2
+38,Phường Từ Liêm,3,6,6,4,4,4,Không xác định,1,5.9
+35,Phường Từ Liêm,4,7,5,5,3,3,Không xác định,1,6.35
+34,Phường Từ Liêm,4,8,4.2,5,3,3,Không xác định,1,5.6
+110,Phường Nghĩa Đô,15,15,7,4,4,4,Không xác định,1,35
+100,Phường Nghĩa Đô,25,15,7,8,8,8,Không xác định,1,66.5
+75,Phường Kiến Hưng,18,4.7,16,2,2,4,Không xác định,1,20.7
+76,Phường Kiến Hưng,18,17,5,4,4,4,Không xác định,1,18.3
+70,Phường Kiến Hưng,8,5.4,13,4,6,6,Không xác định,1,21
+78,Phường Kiến Hưng,3,13,6,5,6,5,Không xác định,1,10
+310,Phường Dương Nội,15,31,10,5,4,4,Không xác định,1,88
+125,Phường Đống Đa,20,15.6,8,4,4,3,Không xác định,1,43.5
+180,Phường Hà Đông,15,12,15,4,6,4,Không xác định,1,56
+200,Phường Hà Đông,15,20,10,3,6,4,Không xác định,1,56
+104,Phường Dương Nội,20,11.6,9,5,4,4,Không xác định,1,26.9
+50,Phường Đống Đa,10,12.5,4,7,6,6,Không xác định,1,16.8
+45,Phường Dương Nội,3,11.2,4,5,6,4,Không xác định,1,10.6
+35,Phường Dương Nội,6,8.8,4,4,3,3,Không xác định,1,15
+39,Phường Đống Đa,3,12,3,5,7,7,Không xác định,1,10.2
+80,Phường Dương Nội,10,13.3,6,8,6,7,Không xác định,1,23
+26,Phường Kiến Hưng,3,8,3,4,3,3,Nam,1,6.5
+33,Phường Dương Nội,3,11,3,5,5,5,Không xác định,1,5.2
+80,Phường Dương Nội,6,20,4,4,4,3,Không xác định,0,10.6
+47,Phường Kiến Hưng,6,9.4,5,3,3,2,Không xác định,1,6.1
+39,Phường Dương Nội,3,10,4,5,4,4,Không xác định,1,7.2
+61,Phường Đống Đa,10,122,5,4,5,4,Không xác định,1,20
+62,Phường Dương Nội,18,12.4,5,5,2,4,Không xác định,1,12.8
+58,Phường Đống Đa,5,7.2,8,7,14,14,Không xác định,1,14.2
+74,Phường Dương Nội,5,15,5,7,11,11,Không xác định,1,19.3
+90,Phường Dương Nội,4,15,6,4,4,4,Không xác định,1,24
+46,Phường Đống Đa,3,9,5,3,3,3,Không xác định,1,9.8
+52,Phường Dương Nội,2,12,4,3,3,3,Không xác định,1,8
+65,Phường Dương Nội,15,16.2,4,5,3,4,Không xác định,1,31
+150,Phường Dương Nội,8,18.8,8,4,6,6,Không xác định,1,56
+135,Phường Dương Nội,15,6.4,21,5,3,5,Không xác định,1,36
+83,Phường Dương Nội,12,5.5,15,7,4,6,Không xác định,1,23.7
+65,Phường Kiến Hưng,20,9.3,7,7,6,6,Không xác định,1,28.5
+60,Phường Dương Nội,6,12,5,3,3,3,Không xác định,1,9.2
+170,Phường Đống Đa,25,17,10,3,4,4,Không xác định,1,39.9
+63,Phường Đống Đa,5,9,7,6,4,4,Không xác định,0,17.8
+30,Phường Dương Nội,7,7.5,4,5,3,4,Không xác định,1,8.5
+70,Phường Kiến Hưng,18,14,5,3,3,3,Không xác định,1,20.5
+78,Phường Kiến Hưng,2,15,5,4,4,4,Đông - Nam,1,23
+63,Phường Đống Đa,4,15,4,4,4,3,Bắc,1,13.7
+57,Phường Kiến Hưng,5,12,5,4,4,4,Không xác định,1,9.89
+51,Phường Kiến Hưng,4,12.8,4,6,11,6,Không xác định,1,14.8
+45,Phường Đống Đa,3,11.2,4,5,6,5,Không xác định,1,12.5
+70,Phường Kiến Hưng,3,14,5,5,5,4,Không xác định,1,19.5
+65,Phường Kiến Hưng,15,13,5,5,4,4,Không xác định,1,20.8
