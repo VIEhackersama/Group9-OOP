@@ -27,12 +27,12 @@ public class House implements RealEstate {
     private Integer bedroomNumber;
     private Integer bathroomNumber;
     private String direction;
-    private Integer law;
-    private Double price;
     private Double room_density;
     private Double bath_per_bed;
     private Double wide_ratio;      // ti le chieu ngang voi chieu dai
     private Double distance_center;   // quang duong den trung tam thanh pho
+    
+    private Double price;
     private static final Map<String, Integer> tierAddress = new HashMap<>();
     private static final Map<String, Integer> tierDirection = new HashMap<>();
 
@@ -149,11 +149,11 @@ public class House implements RealEstate {
     }
 
     public static int addresstoint(String address) {
-        return tierAddress.getOrDefault(address, -1);
+        return tierAddress.getOrDefault(address, 5);
     }
 
     public static int directiontoint(String direction) {
-        return tierDirection.getOrDefault(direction, -1);
+        return tierDirection.getOrDefault(direction, 5);
     }
 
     public static Set<String> getAddressList() {
@@ -218,7 +218,7 @@ public class House implements RealEstate {
         DMatrix dmatrix = new DMatrix(input, 1, input.length);
         float[][] preds = booster.predict(dmatrix);
 
-        this.price = (double) preds[0][0];
+        this.price = (double)(preds[0][0]  + 11);
         return this.price;
     }
 }
