@@ -5,35 +5,35 @@ import org.yourcompany.yourproject.Entity.House;
 import org.yourcompany.yourproject.Entity.PricePrediction;
 import org.yourcompany.yourproject.Entity.User;
 
-import javax.swing.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MarketFrame extends javax.swing.JFrame {
-    
+
     private User loggedInUser;
-    private UserDataService userDataService; // Khai báo Service
-    
-    /**
-     * Creates new form MarketFrame
-     */
+    private UserDataService userDataService;
+
     public MarketFrame(User user) {
         this.loggedInUser = user;
-        this.userDataService = new UserDataService(); // Khởi tạo Service kết nối DB
-        
-        initComponents(); // Hàm này cực kỳ quan trọng, dùng để vẽ giao diện
-        
+        this.userDataService = new UserDataService();
+
+        initComponents();
         this.setLocationRelativeTo(null);
-        
-        // Hiển thị thông tin user
+
         if (loggedInUser != null) {
             lblWelcome.setText("Xin chào, " + loggedInUser.getName());
             lblEmail.setText(loggedInUser.getEmail());
         }
-        
+
         loadComboboxData();
     }
-    
+
     private void loadComboboxData() {
         List<String> addresses = new ArrayList<>(House.getAddressList());
         List<String> directions = new ArrayList<>(House.getDirectionList());
@@ -43,27 +43,27 @@ public class MarketFrame extends javax.swing.JFrame {
         cmbPhuong.setModel(new DefaultComboBoxModel<>(addresses.toArray(new String[0])));
         cmbHuong.setModel(new DefaultComboBoxModel<>(directions.toArray(new String[0])));
     }
-    
-    // --- HÀM DỰ ĐOÁN VÀ LƯU DB ---
+
     private void performPrediction() {
         try {
             String address = (String) cmbPhuong.getSelectedItem();
             String direction = (String) cmbHuong.getSelectedItem();
             
-            Double street = parseDouble(txtStreet.getText());
-            Double width = parseDouble(txtWidth.getText());
-            Double height = parseDouble(txtHeight.getText());
-            Integer floor = parseInt(txtFloor.getText());
-            Integer bedroom = parseInt(txtBedroom.getText());
-            Integer bathroom = parseInt(txtBathroom.getText());
-            Double distance = parseDouble(txtDistance.getText());
+            Double street = getValidDouble(txtStreet, "Đường trước nhà");
+            Double width = getValidDouble(txtWidth, "Chiều rộng");
+            Double height = getValidDouble(txtHeight, "Chiều dài");
+            Double distance = getValidDouble(txtDistance, "Khoảng cách đến thành phố");
+            Integer floor = getValidInteger(txtFloor, "Số tầng");
+            Integer bedroom = getValidInteger(txtBedroom, "Số phòng ngủ");
+            Integer bathroom = getValidInteger(txtBathroom, "Số phòng tắm");
 
+            // Tạo đối tượng House
             House inputHouse = new House(address, street, width, height, floor, bedroom, bathroom, direction, distance);
 
-            // 1. Thực hiện tính toán
+            // Thực hiện tính toán dự đoán
             double predictedPrice = inputHouse.predictPrice();
 
-            // 2. Lưu vào Database (MongoDB)
+            // Lưu vào Database
             try {
                 int newId = userDataService.getNextPredictionId();
                 String noteDetails = String.format("DT: %.1fm2 (%.1fx%.1f), %d tầng, %d PN, %d WC", 
@@ -84,40 +84,55 @@ public class MarketFrame extends javax.swing.JFrame {
                 
             } catch (Exception ex) {
                 System.out.println("Lỗi khi lưu vào DB: " + ex.getMessage());
-                // Không chặn hiển thị kết quả nếu lỗi lưu DB
             }
 
-            // 3. Hiển thị kết quả
-            String resultMsg = String.format("Dựa trên thông tin:\n- Địa chỉ: %s\n- Diện tích: %.1f m2\n- Kết cấu: %d tầng\n\nGIÁ DỰ ĐOÁN: %.2f Tỷ VNĐ", 
-                    address, inputHouse.getArea(), floor, predictedPrice);
+            // Hiển thị kết quả
+            String resultMsg = String.format("Dựa trên thông tin:\n- Địa chỉ: %s\n- Diện tích: %.1f m2\n- Kết cấu: %d tầng\n\nGIÁ DỰ ĐOÁN: %.2f Tỷ VNĐ", address, inputHouse.getArea(), floor, predictedPrice);
             
             JOptionPane.showMessageDialog(this, resultMsg, "Kết quả định giá", JOptionPane.INFORMATION_MESSAGE);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng số!", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi hệ thống: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private Double parseDouble(String text) {
-        if (text == null || text.trim().isEmpty()) return 0.0;
-        return Double.parseDouble(text.trim());
+    private Double getValidDouble(JTextField field, String fieldName) throws Exception {
+        String text = field.getText().trim();
+        if (text.isEmpty()) {
+            field.requestFocus(); // Đưa con trỏ chuột vào ô lỗi
+            throw new Exception("Vui lòng nhập: " + fieldName);
+        }
+        try {
+            double value = Double.parseDouble(text);
+            return value;
+        } catch (NumberFormatException e) {
+            field.requestFocus();
+            throw new Exception(fieldName + " phải là một con số hợp lệ (Ví dụ: 5.5)!");
+        }
     }
 
-    private Integer parseInt(String text) {
-        if (text == null || text.trim().isEmpty()) return 0;
-        return Integer.parseInt(text.trim());
+    private Integer getValidInteger(JTextField field, String fieldName) throws Exception {
+        String text = field.getText().trim();
+        if (text.isEmpty()) {
+            field.requestFocus();
+            throw new Exception("Vui lòng nhập: " + fieldName);
+        }
+        try {
+            int value = Integer.parseInt(text);
+            return value;
+        } catch (NumberFormatException e) {
+            field.requestFocus();
+            throw new Exception(fieldName + " phải là số nguyên !");
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
@@ -136,11 +151,11 @@ public class MarketFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtWidth = new javax.swing.JTextField();
         btnPredict = new javax.swing.JButton();
-        btnHistory = new javax.swing.JButton(); // --- KHAI BÁO NÚT LỊCH SỬ ---
         txtDistance = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cmbPhuong = new javax.swing.JComboBox<>();
         cmbHuong = new javax.swing.JComboBox<>();
+        btnHistory = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         lblEmail = new javax.swing.JLabel();
         lblWelcome = new javax.swing.JLabel();
@@ -211,19 +226,15 @@ public class MarketFrame extends javax.swing.JFrame {
             }
         });
 
-        // --- CẤU HÌNH NÚT LỊCH SỬ ---
-        btnHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
-        btnHistory.setText("Xem Lịch Sử");
-        btnHistory.addActionListener(new java.awt.event.ActionListener() {
+        txtDistance.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtDistance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHistoryActionPerformed(evt);
+                txtDistanceActionPerformed(evt);
             }
         });
 
-        txtDistance.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Đường đến thành phố:");
+        jLabel2.setText("Khoảng cách đến thành phố:");
 
         cmbPhuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbPhuong.addActionListener(new java.awt.event.ActionListener() {
@@ -234,24 +245,32 @@ public class MarketFrame extends javax.swing.JFrame {
 
         cmbHuong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        btnHistory.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnHistory.setText("XEM LỊCH SỬ");
+        btnHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtHeight, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                                 .addComponent(jLabel11))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtWidth, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +278,7 @@ public class MarketFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel8))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(cmbPhuong, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,19 +291,20 @@ public class MarketFrame extends javax.swing.JFrame {
                                     .addComponent(txtFloor, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                     .addComponent(txtBathroom))
                                 .addComponent(txtBedroom, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cmbHuong, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbHuong, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(69, 69, 69))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnPredict)
-                .addGap(18, 18, 18) // Thêm khoảng cách
-                .addComponent(btnHistory) // --- THÊM NÚT LỊCH SỬ VÀO LAYOUT ---
-                .addGap(300, 300, 300))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnPredict)
+                                .addGap(47, 47, 47)
+                                .addComponent(btnHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,11 +349,11 @@ public class MarketFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtHeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE) // Gom 2 nút vào 1 dòng
-                    .addComponent(btnPredict)
-                    .addComponent(btnHistory))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPredict, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
@@ -372,7 +392,7 @@ public class MarketFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(lblWelcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
                 .addComponent(lblEmail)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogout)
@@ -411,43 +431,48 @@ public class MarketFrame extends javax.swing.JFrame {
         );
 
         pack();
-    }                          
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBedroomActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        
-    }                                          
+    private void txtBedroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBedroomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBedroomActionPerformed
 
-    private void txtFloorActionPerformed(java.awt.event.ActionEvent evt) {                                         
-       
-    }                                        
+    private void txtFloorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFloorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFloorActionPerformed
 
-    private void btnPredictActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        performPrediction(); 
-    }
-    
- 
-    private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        
-        new HistoryFrame(loggedInUser).setVisible(true);
-    } 
+    private void btnPredictActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPredictActionPerformed
+        // TODO add your handling code here:
+        performPrediction();
+    }//GEN-LAST:event_btnPredictActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
         new LoginFrame().setVisible(true);
         this.dispose();
-    }                                         
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void cmbPhuongActionPerformed(java.awt.event.ActionEvent evt) {                                          
-       
-    }                                         
+    private void cmbPhuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPhuongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPhuongActionPerformed
 
-    private void txtWidthActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        
-    }
+    private void txtWidthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtWidthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtWidthActionPerformed
 
-    // Variables declaration - do not modify
+    private void txtDistanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDistanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDistanceActionPerformed
+
+    private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
+        // TODO add your handling code here:
+        new HistoryFrame(loggedInUser).setVisible(true);
+    }//GEN-LAST:event_btnHistoryActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHistory;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPredict;
-    private javax.swing.JButton btnHistory; // --- BIẾN NÚT LỊCH SỬ ---
     private javax.swing.JComboBox<String> cmbHuong;
     private javax.swing.JComboBox<String> cmbPhuong;
     private javax.swing.JLabel jLabel1;
@@ -471,5 +496,5 @@ public class MarketFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtHeight;
     private javax.swing.JTextField txtStreet;
     private javax.swing.JTextField txtWidth;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }
