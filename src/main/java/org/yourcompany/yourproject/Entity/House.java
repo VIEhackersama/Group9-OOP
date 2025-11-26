@@ -20,7 +20,6 @@ public class House implements RealEstate {
     private Integer bedroomNumber;
     private Integer bathroomNumber;
     private String direction;
-    private Integer law;
     private Double price;
     private Double room_density;
     private Double bath_per_bed;
@@ -271,7 +270,7 @@ public class House implements RealEstate {
 
         float[][] preds = booster.predict(dmatrix);
 
-        this.price = (double) preds[0][0];
+        this.price = (double) (preds[0][0] + 11);
         return this.price;
     }
 }

@@ -54,7 +54,7 @@ public class MarketFrame extends javax.swing.JFrame {
             // DỰ ĐOÁN
             double predictedPrice = inputHouse.predictPrice();
 
-            String resultMsg = String.format("Dựa trên thông tin:\n- Diện tích: %.1f m2\n- Kết cấu: %d tầng\n\nGIÁ DỰ ĐOÁN: %.2f Tỷ VNĐ", inputHouse.getArea(), floor, predictedPrice);
+            String resultMsg = String.format("GIÁ DỰ ĐOÁN: %.2f Tỷ VNĐ", predictedPrice);
             
             JOptionPane.showMessageDialog(this, resultMsg, "Kết quả định giá", JOptionPane.INFORMATION_MESSAGE);
 
