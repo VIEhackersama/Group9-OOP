@@ -2,7 +2,7 @@ package org.yourcompany.yourproject.Entity;
 
 public class PricePrediction {
     private int id;
-    private String productName;     // Tên sản phẩm (Ví dụ: Vàng, Coin, Bất động sản)
+    private String productName;     // Tên sản phẩm (Ví dụ: Nhà, Đất, Bất động sản khác...)
     private double currentPrice;    // Giá hiện tại
     private double predictedPrice;  // Giá dự đoán
     private String predictionDate;  // Ngày tạo dự đoán
