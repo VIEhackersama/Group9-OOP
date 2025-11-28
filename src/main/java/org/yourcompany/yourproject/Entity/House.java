@@ -12,6 +12,7 @@ import ml.dmlc.xgboost4j.java.DMatrix;
 import ml.dmlc.xgboost4j.java.XGBoost;
 
 interface RealEstate {
+    public static final String city = "Hanoi";
     double predictPrice() throws Exception;
 }
 
