@@ -7,16 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.yourcompany.yourproject.Interface.IHouse;
+
 import ml.dmlc.xgboost4j.java.Booster;
 import ml.dmlc.xgboost4j.java.DMatrix;
 import ml.dmlc.xgboost4j.java.XGBoost;
 
-interface RealEstate {
-    public static final String city = "Hanoi";
-    double predictPrice() throws Exception;
-}
-
-public class House implements RealEstate {
+public class House implements IHouse {
 
     private Double area;
     private String address;

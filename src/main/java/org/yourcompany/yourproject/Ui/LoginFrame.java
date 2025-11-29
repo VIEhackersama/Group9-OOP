@@ -1,13 +1,14 @@
 package org.yourcompany.yourproject.Ui;
 
-import org.yourcompany.yourproject.Config.PasswordUtil;
-import org.yourcompany.yourproject.Config.UserDataService;
 import org.yourcompany.yourproject.Entity.User;
+import org.yourcompany.yourproject.Service.PasswordService;
+import org.yourcompany.yourproject.Service.UserService;
+
 import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame {
     
-    private UserDataService userDataService;
+    private UserService userDataService;
     
     /**
      * Creates new form NewJFrame
@@ -15,7 +16,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.userDataService = new UserDataService();
+        this.userDataService = new UserService();
     }
 
     /**
@@ -171,7 +172,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         User user = userDataService.findUserByEmail(email);
 
-        if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
+        if (user != null && PasswordService.checkPassword(password, user.getPassword())) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công! Xin chào " + user.getName());
             new MarketFrame(user).setVisible(true);
             this.dispose();

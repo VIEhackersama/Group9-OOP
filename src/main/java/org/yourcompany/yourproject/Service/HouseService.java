@@ -1,4 +1,4 @@
-package org.yourcompany.yourproject.Config;
+package org.yourcompany.yourproject.Service;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -8,25 +8,26 @@ import com.mongodb.client.FindIterable;
 import org.bson.Document;
 
 import org.yourcompany.yourproject.Entity.House;
+import org.yourcompany.yourproject.Interface.IHouseService;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class HouseMongoController {
+public class HouseService implements IHouseService {
 
     private String connectionString;
     private String databaseName;
     private String collectionName = "nhadat"; 
 
-    public HouseMongoController() {
+    public HouseService() {
         loadConfig();
     }
 
     private void loadConfig() {
         Properties prop = new Properties();
-        try (InputStream input = HouseMongoController.class.getResourceAsStream("/db.properties")) {
+        try (InputStream input = HouseService.class.getResourceAsStream("/db.properties")) {
             prop.load(input);
             this.connectionString = prop.getProperty("mongodb.uri");
             this.databaseName = prop.getProperty("mongodb.database");
@@ -34,7 +35,7 @@ public class HouseMongoController {
             e.printStackTrace();
         }
     }
-    
+    @Override
     public List<House> loadHousesFromDb() {
         List<House> houses = new ArrayList<>();
 
@@ -93,7 +94,6 @@ public class HouseMongoController {
             return Double.parseDouble((String) value);
         return 0.0;
     }
-    
     private Integer getIntegerSafe(Document doc, String key) {
         Object value = doc.get(key);
         if (value == null)
