@@ -19,25 +19,24 @@ public class UserDataService {
     private MongoCollection<PricePrediction> predictionCollection;
 
     public UserDataService() {
-        // 1. Lấy kết nối từ MongoConfig
+        // Lấy kết nối từ MongoConfig
         this.userCollection = MongoConfig.getUserCollection();
         this.countersCollection = MongoConfig.getCountersCollection();
         this.predictionCollection = MongoConfig.getPredictionCollection(); 
 
-        // 2. Khởi tạo bộ đếm ID cho User nếu chưa có (bắt đầu từ 0)
+        // Khởi tạo bộ đếm ID cho User nếu chưa có (bắt đầu từ 0)
         if (countersCollection.find(Filters.eq("_id", "userId")).first() == null) {
             countersCollection.insertOne(new Document("_id", "userId").append("seq", 0));
         }
 
-        // 3. Khởi tạo bộ đếm ID cho PricePrediction nếu chưa có (bắt đầu từ 0)
+        // Khởi tạo bộ đếm ID cho PricePrediction nếu chưa có (bắt đầu từ 0)
         if (countersCollection.find(Filters.eq("_id", "predictionId")).first() == null) {
             countersCollection.insertOne(new Document("_id", "predictionId").append("seq", 0));
         }
     }
 
-    // =================================================================
+
     // PHẦN 1: XỬ LÝ USER (Đăng nhập / Đăng ký)
-    // =================================================================
 
     /**
      * Tìm user bằng email (Dùng cho đăng nhập).
@@ -67,10 +66,7 @@ public class UserDataService {
         return counter.getInteger("seq");
     }
 
-    // =================================================================
     // PHẦN 2: XỬ LÝ DỰ ĐOÁN (Lưu lịch sử / Lấy lịch sử)
-    // =================================================================
-
     /**
      * Lưu kết quả dự đoán nhà vào database.
      * @param prediction Đối tượng dự đoán.

@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 public class RegisterFrame extends javax.swing.JFrame {
     
     private UserDataService userDataService;
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
     
     /**
      * Creates new form NewJFrame
@@ -193,39 +192,32 @@ public class RegisterFrame extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-        String name = txtName.getText().trim();
-        String email = txtEmail.getText().trim();
-        String phone = txtPhone.getText().trim();
-        String address = txtAddress.getText().trim();
-        String password = new String(txtPassword.getPassword());
+        try {
+            String name = txtName.getText().trim();
+            String email = txtEmail.getText().trim();
+            String phone = txtPhone.getText().trim();
+            String address = txtAddress.getText().trim();
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ Tên, Email, và Mật khẩu!", "Lỗi",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
+            char[] passChars = txtPassword.getPassword();
+            if (passChars == null || passChars.length == 0) {
+                JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String password = new String(passChars);
+
+            //Hash password và lưu user
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            int id = userDataService.getNextUserId();
+            User newUser = new User(id, name, email, phone, address, hashedPassword);
+            userDataService.saveUser(newUser);
+
+            JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
+            new LoginFrame().setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-
-        if (!EMAIL_PATTERN.matcher(email).matches()) {
-            JOptionPane.showMessageDialog(this, "Email không đúng định dạng.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (userDataService.findUserByEmail(email) != null) {
-            JOptionPane.showMessageDialog(this, "Email này đã được sử dụng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        //Hash password and save user
-        String hashedPassword = PasswordUtil.hashPassword(password);
-        int id = userDataService.getNextUserId();
-        User newUser = new User(id, name, email, phone, address, hashedPassword);
-        userDataService.saveUser(newUser);
-
-        JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công",
-                JOptionPane.INFORMATION_MESSAGE);
-
-        new LoginFrame().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
