@@ -6,10 +6,10 @@ import java.util.List;
 import javax.swing.*;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import org.yourcompany.yourproject.Config.HouseMongoController;
-import org.yourcompany.yourproject.Config.UserDataService;
 import org.yourcompany.yourproject.Entity.House;
 import org.yourcompany.yourproject.Entity.User;
+import org.yourcompany.yourproject.Service.HouseService;
+import org.yourcompany.yourproject.Service.UserService;
 import org.yourcompany.yourproject.Ui.LoginFrame;
 import org.yourcompany.yourproject.Ui.LoginFrame;
 

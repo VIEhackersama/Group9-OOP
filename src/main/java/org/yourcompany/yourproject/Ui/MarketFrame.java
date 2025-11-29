@@ -1,9 +1,9 @@
 package org.yourcompany.yourproject.Ui;
 
-import org.yourcompany.yourproject.Config.UserDataService;
 import org.yourcompany.yourproject.Entity.House;
 import org.yourcompany.yourproject.Entity.PricePrediction;
 import org.yourcompany.yourproject.Entity.User;
+import org.yourcompany.yourproject.Service.UserService;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -12,14 +12,14 @@ import java.util.*;
 public class MarketFrame extends javax.swing.JFrame {
     
     private User loggedInUser;
-    private UserDataService userDataService; // Khai báo Service
+    private UserService userDataService; // Khai báo Service
     
     /**
      * Creates new form MarketFrame
      */
     public MarketFrame(User user) {
         this.loggedInUser = user;
-        this.userDataService = new UserDataService(); // Khởi tạo Service kết nối DB
+        this.userDataService = new UserService(); // Khởi tạo Service kết nối DB
         
         initComponents(); // Hàm này cực kỳ quan trọng, dùng để vẽ giao diện
         

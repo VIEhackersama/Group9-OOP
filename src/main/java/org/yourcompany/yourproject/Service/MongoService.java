@@ -1,4 +1,4 @@
-package org.yourcompany.yourproject.Config;
+package org.yourcompany.yourproject.Service;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import org.yourcompany.yourproject.App;
 
-public class MongoConfig {
+public class MongoService {
 
     private static final String PROPERTIES_FILE = "db.properties";
     private static MongoClient mongoClient;

@@ -1,14 +1,15 @@
 package org.yourcompany.yourproject.Ui;
 
-import org.yourcompany.yourproject.Config.PasswordUtil;
-import org.yourcompany.yourproject.Config.UserDataService;
 import org.yourcompany.yourproject.Entity.User;
+import org.yourcompany.yourproject.Service.PasswordService;
+import org.yourcompany.yourproject.Service.UserService;
+
 import javax.swing.JOptionPane;
 import java.util.regex.Pattern;
 
 public class RegisterFrame extends javax.swing.JFrame {
     
-    private UserDataService userDataService;
+    private UserService userDataService;
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
     
     /**
@@ -17,7 +18,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     public RegisterFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.userDataService = new UserDataService();
+        this.userDataService = new UserService();
     }
 
     /**
@@ -216,7 +217,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         }
 
         //Hash password and save user
-        String hashedPassword = PasswordUtil.hashPassword(password);
+        String hashedPassword = PasswordService.hashPassword(password);
         int id = userDataService.getNextUserId();
         User newUser = new User(id, name, email, phone, address, hashedPassword);
         userDataService.saveUser(newUser);

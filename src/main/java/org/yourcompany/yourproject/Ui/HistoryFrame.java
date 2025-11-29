@@ -1,8 +1,8 @@
 package org.yourcompany.yourproject.Ui;
 
-import org.yourcompany.yourproject.Config.UserDataService;
 import org.yourcompany.yourproject.Entity.PricePrediction;
 import org.yourcompany.yourproject.Entity.User;
+import org.yourcompany.yourproject.Service.UserService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,12 +13,12 @@ import java.util.List;
 public class HistoryFrame extends javax.swing.JFrame {
 
     private User loggedInUser;
-    private UserDataService userDataService;
+    private UserService userDataService;
     private DefaultTableModel tableModel;
 
     public HistoryFrame(User user) {
         this.loggedInUser = user;
-        this.userDataService = new UserDataService();
+        this.userDataService = new UserService();
         
         initComponents();
         this.setLocationRelativeTo(null);
