@@ -29,23 +29,23 @@ public class HistoryFrame extends javax.swing.JFrame {
     }
 
     private void loadHistoryData() {
-        // 1. Lấy danh sách từ DB
+        // Lấy danh sách từ DB
         List<PricePrediction> list = userDataService.getPredictionsByUserId(loggedInUser.getId());
 
-        // 2. Xóa dữ liệu cũ trên bảng (nếu có)
+        // Xóa dữ liệu cũ trên bảng (nếu có)
         tableModel = (DefaultTableModel) tblHistory.getModel();
         tableModel.setRowCount(0);
 
-        // 3. Format tiền tệ cho đẹp (Ví dụ: 5,000,000,000)
+        // Format tiền tệ cho đẹp (Ví dụ: 5,000,000,000)
         DecimalFormat df = new DecimalFormat("#,###");
 
-        // 4. Đổ dữ liệu vào bảng
+        // Đổ dữ liệu vào bảng
         for (PricePrediction p : list) {
             tableModel.addRow(new Object[]{
                 p.getId(),
                 p.getPredictionDate(),
                 p.getProductName(),
-                df.format(p.getPredictedPrice()) + " VNĐ", // Format giá
+                df.format(p.getPredictedPrice()) + " Tỷ VNĐ", // Format giá
                 p.getNote()
             });
         }
@@ -97,7 +97,6 @@ public class HistoryFrame extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        // Cấu hình cột cho bảng
         tblHistory.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         tblHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
@@ -118,6 +117,7 @@ public class HistoryFrame extends javax.swing.JFrame {
         if (tblHistory.getColumnModel().getColumnCount() > 0) {
             tblHistory.getColumnModel().getColumn(0).setMaxWidth(50); // Cột ID nhỏ
             tblHistory.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tblHistory.getColumnModel().getColumn(2).setPreferredWidth(200);
             tblHistory.getColumnModel().getColumn(3).setPreferredWidth(150);
             tblHistory.getColumnModel().getColumn(4).setPreferredWidth(300);
         }

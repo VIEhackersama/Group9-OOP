@@ -24,12 +24,12 @@ public class UserService implements IUserService {
         this.countersCollection = MongoService.getCountersCollection();
         this.predictionCollection = MongoService.getPredictionCollection(); 
 
-        // 2. Khởi tạo bộ đếm ID cho User nếu chưa có (bắt đầu từ 0)
+        // Khởi tạo bộ đếm ID cho User nếu chưa có (bắt đầu từ 0)
         if (countersCollection.find(Filters.eq("_id", "userId")).first() == null) {
             countersCollection.insertOne(new Document("_id", "userId").append("seq", 0));
         }
 
-        // 3. Khởi tạo bộ đếm ID cho PricePrediction nếu chưa có (bắt đầu từ 0)
+        // Khởi tạo bộ đếm ID cho PricePrediction nếu chưa có (bắt đầu từ 0)
         if (countersCollection.find(Filters.eq("_id", "predictionId")).first() == null) {
             countersCollection.insertOne(new Document("_id", "predictionId").append("seq", 0));
         }

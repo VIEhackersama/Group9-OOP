@@ -15,7 +15,6 @@ import ml.dmlc.xgboost4j.java.XGBoost;
 
 public class House implements IHouse {
 
-    private String id;
     private Double area;
     private String address;
     private Double streetInFrontOfHouse;
@@ -29,7 +28,7 @@ public class House implements IHouse {
     private Double bath_per_bed;
     private Double wide_ratio;      // ti le chieu ngang voi chieu dai
     private Double distance_center;   // quang duong den trung tam thanh pho
-    
+
     private Double price;
     private static final Map<String, Integer> tierAddress = new HashMap<>();
     private static final Map<String, Integer> tierDirection = new HashMap<>();
@@ -44,47 +43,114 @@ public class House implements IHouse {
                  Double height, Integer floorNumber, Integer bedroomNumber,
                  Integer bathroomNumber, String direction, Double distance_center) {
 
-        this.area = width * height;
+        setAddress(address);
+        setStreetInFrontOfHouse(streetInFrontOfHouse);
+        setWidth(width);
+        setHeight(height);
+        setFloorNumber(floorNumber);
+        setBedroomNumber(bedroomNumber);
+        setBathroomNumber(bathroomNumber);
+        setDirection(direction);
+        setDistance_center(distance_center);
+
+        recalcDerivedFields();
+    }
+
+    private void recalcDerivedFields() {
+        if (this.width != null && this.height != null) {
+            this.area = this.width * this.height;
+        }
+        if (this.area != null && this.area > 0 && this.bedroomNumber != null) {
+            this.room_density = this.bedroomNumber / this.area;
+        }
+        if (this.bedroomNumber != null && this.bathroomNumber != null) {
+            this.bath_per_bed = this.bathroomNumber / (double)(this.bedroomNumber + 1);
+        }
+        if (this.width != null && this.height != null && this.height > 0) {
+            this.wide_ratio = this.width / this.height;
+        }
+    }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("Vui lòng chọn Địa chỉ/Khu vực hợp lệ.");
+        }
         this.address = address;
+    }
+
+    public Double getStreetInFrontOfHouse() { return streetInFrontOfHouse; }
+    public void setStreetInFrontOfHouse(Double streetInFrontOfHouse) {
+        if (streetInFrontOfHouse == null || streetInFrontOfHouse < 0) {
+            throw new IllegalArgumentException("Đường trước nhà không được âm.");
+        }
         this.streetInFrontOfHouse = streetInFrontOfHouse;
+    }
+
+    public Double getWidth() { return width; }
+    public void setWidth(Double width) {
+        if (width == null || width <= 0) {
+            throw new IllegalArgumentException("Chiều rộng phải lớn hơn 0.");
+        }
         this.width = width;
+        recalcDerivedFields();
+    }
+
+    public Double getHeight() { return height; }
+    public void setHeight(Double height) {
+        if (height == null || height <= 0) {
+            throw new IllegalArgumentException("Chiều dài phải lớn hơn 0.");
+        }
         this.height = height;
+        recalcDerivedFields();
+    }
+
+    public Integer getFloorNumber() { return floorNumber; }
+    public void setFloorNumber(Integer floorNumber) {
+        if (floorNumber == null || floorNumber < 1) {
+            throw new IllegalArgumentException("Số tầng phải từ 1 trở lên.");
+        }
         this.floorNumber = floorNumber;
+    }
+
+    public Integer getBedroomNumber() { return bedroomNumber; }
+    public void setBedroomNumber(Integer bedroomNumber) {
+        if (bedroomNumber == null || bedroomNumber < 0) {
+            throw new IllegalArgumentException("Số phòng ngủ không được âm.");
+        }
         this.bedroomNumber = bedroomNumber;
+        recalcDerivedFields();
+    }
+
+    public Integer getBathroomNumber() { return bathroomNumber; }
+    public void setBathroomNumber(Integer bathroomNumber) {
+        if (bathroomNumber == null || bathroomNumber < 0) {
+            throw new IllegalArgumentException("Số phòng tắm không được âm.");
+        }
         this.bathroomNumber = bathroomNumber;
+        recalcDerivedFields();
+    }
+
+    public String getDirection() { return direction; }
+    public void setDirection(String direction) {
+        if (direction == null || direction.trim().isEmpty()) {
+            throw new IllegalArgumentException("Vui lòng chọn Hướng nhà hợp lệ.");
+        }
         this.direction = direction;
-        this.room_density = (double) this.bedroomNumber / this.area;
-        this.bath_per_bed = this.bathroomNumber / (double)(this.bedroomNumber + 1);
-        this.wide_ratio = this.width / this.height;
+    }
+
+    public Double getDistance_center() { return distance_center; }
+    public void setDistance_center(Double distance_center) {
+        if (distance_center == null || distance_center < 0) {
+            throw new IllegalArgumentException("Khoảng cách đến trung tâm không được âm.");
+        }
         this.distance_center = distance_center;
     }
 
-    // --- CÁC GETTER/SETTER ---
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
     public Double getArea() { return area; }
-    private void recalcArea() { this.area = this.width * this.height; }
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-    public Double getStreetInFrontOfHouse() { return streetInFrontOfHouse; }
-    public void setStreetInFrontOfHouse(Double streetInFrontOfHouse) { this.streetInFrontOfHouse = streetInFrontOfHouse; }
-    public Double getWidth() { return width; }
-    public void setWidth(Double width) { this.width = width; recalcArea(); }
-    public Double getHeight() { return height; }
-    public void setHeight(Double height) { this.height = height; recalcArea(); }
-    public Integer getFloorNumber() { return floorNumber; }
-    public void setFloorNumber(Integer floorNumber) { this.floorNumber = floorNumber; }
-    public Integer getBedroomNumber() { return bedroomNumber; }
-    public void setBedroomNumber(Integer bedroomNumber) { this.bedroomNumber = bedroomNumber; }
-    public Integer getBathroomNumber() { return bathroomNumber; }
-    public void setBathroomNumber(Integer bathroomNumber) { this.bathroomNumber = bathroomNumber; }
-    public String getDirection() { return direction; }
-    public void setDirection(String direction) { this.direction = direction; }
     public Double getRoom_density() { return room_density; }
     public Double getBath_per_bed() { return bath_per_bed; }
     public Double getWide_ratio() { return wide_ratio; }
-    public Double getDistance_center() { return distance_center; }
-    public void setDistance_center(Double distance_center) { this.distance_center = distance_center; }
 
     @Override
     public String toString() {
@@ -169,8 +235,8 @@ public class House implements IHouse {
         if (booster == null) {
             try {
                 // 1. Tìm file json nằm cùng thư mục với Class này
-                URL resource = House.class.getResource("house_price_json.json");
-                
+                URL resource = House.class.getResource("/house_price_json.json");
+
                 if (resource == null) {
                     throw new RuntimeException("LỖI: Không tìm thấy file 'house_price_json.json' trong thư mục Entity!");
                 }
@@ -181,7 +247,7 @@ public class House implements IHouse {
                 // 3. Xử lý đường dẫn (đặc biệt quan trọng trên Windows)
                 // Nếu đường dẫn có dấu cách (%20), phải giải mã
                 modelPath = URLDecoder.decode(modelPath, StandardCharsets.UTF_8.name());
-                
+
                 // Trên Windows, đường dẫn trả về có thể có dấu / ở đầu (VD: /C:/...), cần cắt bỏ
                 if (System.getProperty("os.name").toLowerCase().contains("win") && modelPath.startsWith("/")) {
                     modelPath = modelPath.substring(1);
@@ -189,7 +255,7 @@ public class House implements IHouse {
 
                 System.out.println("Đang load model từ: " + modelPath);
                 booster = XGBoost.loadModel(modelPath);
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new Exception("Không thể load model XGBoost: " + e.getMessage());

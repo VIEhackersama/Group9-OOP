@@ -222,12 +222,14 @@ public class RegisterFrame extends javax.swing.JFrame {
         User newUser = new User(id, name, email, phone, address, hashedPassword);
         userDataService.saveUser(newUser);
 
-        JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Đăng ký thành công! Vui lòng đăng nhập.", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 
-        new LoginFrame().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnRegisterActionPerformed
+            new LoginFrame().setVisible(true);
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+//GEN-LAST:event_btnRegisterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
